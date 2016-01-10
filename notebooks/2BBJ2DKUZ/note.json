@@ -1,0 +1,189 @@
+{
+  "paragraphs": [
+    {
+      "text": "%md\n\u003ch2\u003eCombining Zeppelin, Ignite, and QuantLib\u003c/h2\u003e\n",
+      "dateUpdated": "Jan 10, 2016 3:25:30 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1452437285037_-1410984338",
+      "id": "20160110-144805_947597523",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eCombining Zeppelin, Ignite, and QuantLib\u003c/h2\u003e\n"
+      },
+      "dateCreated": "Jan 10, 2016 2:48:05 PM",
+      "dateStarted": "Jan 10, 2016 3:25:30 PM",
+      "dateFinished": "Jan 10, 2016 3:25:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\n// Import ignite libs\n\nimport org.apache.ignite.cluster.ClusterNode\nimport org.apache.ignite.scalar.scalar\nimport org.apache.ignite.scalar.scalar._\nimport scala.collection.JavaConversions._\n",
+      "dateUpdated": "Jan 10, 2016 4:04:23 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1452439582300_2082413605",
+      "id": "20160110-152622_47244505",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.apache.ignite.cluster.ClusterNode\nimport org.apache.ignite.scalar.scalar\nimport org.apache.ignite.scalar.scalar._\nimport scala.collection.JavaConversions._\n"
+      },
+      "dateCreated": "Jan 10, 2016 3:26:22 PM",
+      "dateStarted": "Jan 10, 2016 4:04:23 PM",
+      "dateFinished": "Jan 10, 2016 4:04:24 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\n// Some basic cluster info\n\nprintln(\"Number of client nodes: \" + ignite$.cluster().nodes().filter( n \u003d\u003e n.isClient() ).size()  )\nprintln(\"Number of server nodes: \" + ignite$.cluster().nodes().filter( n \u003d\u003e !n.isClient() ).size() )\nprintln(\"Number of cpus: \" + ignite$.cluster().metrics().getTotalCpus() )",
+      "dateUpdated": "Jan 10, 2016 4:06:52 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1452439604016_938201025",
+      "id": "20160110-152644_1537706105",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "Number of client nodes: 1\nNumber of server nodes: 1\nNumber of cpus: 2\n"
+      },
+      "dateCreated": "Jan 10, 2016 3:26:44 PM",
+      "dateStarted": "Jan 10, 2016 4:06:52 PM",
+      "dateFinished": "Jan 10, 2016 4:06:52 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\n\nignite$.compute().call(() \u003d\u003e {\n    \n    import org.quantlib._\n    \n    val dayCounter     \u003d new ActualActual();\n\tval settlementDate \u003d new Date(27, Month.December, 2004);\n\tSettings.instance().setEvaluationDate(settlementDate);\n\n\tval exerciseDate \u003d new Date(28, Month.March, 2005);\n\tval maturity \u003d dayCounter.yearFraction(settlementDate, exerciseDate);\n\n\tval payoff \u003d new PlainVanillaPayoff(Option.Type.Call, 1.05);\n\tval exercise \u003d new EuropeanExercise(exerciseDate);\n\tval vanillaOption \u003d new VanillaOption(payoff, exercise);\n\n\tval rTS \u003d new YieldTermStructureHandle(\n\tnew FlatForward(settlementDate, 0.0225, dayCounter));\n\n\tval divTS \u003d new YieldTermStructureHandle(\n\tnew FlatForward(settlementDate, 0.02, dayCounter));\n\n\tval s0 \u003d new QuoteHandle(new SimpleQuote(1.0));\n\n\tval v0    \u003d  0.1;\n\tval kappa \u003d  3.16;\n\tval theta \u003d  0.09;\n\tval sigma \u003d  0.4;\n\tval rho   \u003d -0.2;\n\n\tval hestonProcess \u003d new HestonProcess(rTS, divTS, s0, v0, \n\tkappa, theta, sigma, rho);\n\n\tval hestonModel \u003d new HestonModel(hestonProcess);\n\tval analyticEngine \u003d new AnalyticHestonEngine(hestonModel);\n\tvanillaOption.setPricingEngine(analyticEngine);\n\n    vanillaOption.NPV()\n})",
+      "dateUpdated": "Jan 10, 2016 4:03:40 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1452438985774_1764933942",
+      "id": "20160110-151625_417374606",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res158: Double \u003d 0.04047745149137422\n"
+      },
+      "dateCreated": "Jan 10, 2016 3:16:25 PM",
+      "dateStarted": "Jan 10, 2016 4:03:40 PM",
+      "dateFinished": "Jan 10, 2016 4:03:40 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "dateUpdated": "Jan 10, 2016 3:25:30 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1452438991585_-1949816688",
+      "id": "20160110-151631_1596164695",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT"
+      },
+      "dateCreated": "Jan 10, 2016 3:16:31 PM",
+      "dateStarted": "Jan 10, 2016 3:25:30 PM",
+      "dateFinished": "Jan 10, 2016 3:25:56 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "Ignite Example",
+  "id": "2BBJ2DKUZ",
+  "angularObjects": {
+    "2BBBFJGVV": [],
+    "2B96JM8U6": [],
+    "2BBGQ5B3X": [],
+    "2BBHXCC31": [],
+    "2BASP56B1": [],
+    "2BAYPR4VU": [],
+    "2B85ANT1D": [],
+    "2BA3JB1XC": [],
+    "2B8CTZ5WY": [],
+    "2BA4CKBMU": [],
+    "2B82HFPAJ": [],
+    "2BAJZA2JW": [],
+    "2B9CPRGV5": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
