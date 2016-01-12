@@ -16,7 +16,12 @@ echo "Building quil-server..."
 cd server
 mvn clean install
 cp target/*.jar ../../../quantlib-quil-server
-cp -r target/libs ../../../quantlib-quil-server 
+cp -r target/libs ../../../quantlib-quil-server
+
+cp target/*.jar ../../../quantlib-ignite
+mkdir ../../../quantlib-ignite/libs
+cp -r target/libs/scala* ../../../quantlib-ignite/libs
+
 cp -r ../bin/* ../../../bin
 cp -r ../sampledata ../../../sampledata
 
