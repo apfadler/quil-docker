@@ -5,9 +5,9 @@ source bin/env.sh
 echo "Using QUIL_HOME = $QUIL_HOME"
 
 echo "Retrieving quil-src..."
+rm -rf build
 mkdir build
 cd build
-rm -rf *
 git clone https://github.com/apfadler/quil-src.git
 cd quil-src
 git checkout master
@@ -15,6 +15,8 @@ git checkout master
 echo "Building quil-server..."
 cd server
 mvn clean install
+cp -r ../bin/* ../../../bin
+cp -r ../sampledata ../../../sampledata
 
 echo "Building docker images..."
 cd ../../../bin
