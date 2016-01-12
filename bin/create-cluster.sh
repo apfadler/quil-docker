@@ -9,3 +9,4 @@ $QUIL_HOME/bin/run-ignite.sh
 eval "$(docker-machine env -u)"
 $QUIL_HOME/bin/run-ignite.sh
 $QUIL_HOME/bin/run-zeppelin.sh
+$QUIL_HOME/bin/run-quil-server.sh
