@@ -15,6 +15,8 @@ git checkout master
 echo "Building quil-server..."
 cd server
 mvn clean install
+cp target/*.jar ../../../quantlib-quil-server
+cp -r target/libs ../../../quantlib-quil-server 
 cp -r ../bin/* ../../../bin
 cp -r ../sampledata ../../../sampledata
 
