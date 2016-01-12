@@ -24,7 +24,7 @@ RUN wget http://downloads.sourceforge.net/project/quantlib/QuantLib/${quantlib_s
 RUN  mkdir -p /quil/libs  
 
 COPY server-0.1-SNAPSHOT.jar /quil
-COPY libs/*.jar /quil/libs
+COPY libs/*.jar /quil/libs/
 
 RUN cp /usr/local/lib/QuantLib.jar /quil/libs
 
