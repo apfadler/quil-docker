@@ -28,6 +28,6 @@ COPY libs/*.jar /quil/libs/
 
 RUN cp /usr/local/lib/QuantLib.jar /quil/libs
 
-CMD cd /quil && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib java -cp ".:libs/" org.quil.QuilServer
+CMD cd /quil && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib java -jar org.quil.server.QuilServer
 
 
