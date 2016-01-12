@@ -11,5 +11,21 @@
     <bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
         <!-- Set to true to enable distributed class loading for examples, default is false. -->
         <property name="peerClassLoadingEnabled" value="true"/>
+          <property name="discoverySpi">
+            <bean class="org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi">
+              <property name="ipFinder">
+               <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.s3.TcpDiscoveryS3IpFinder">
+                <property name="awsCredentials" ref="aws.creds"/>
+                <property name="bucketName" value="#{systemEnvironment['AWS_S3_BUCKET']}"/>
+               </bean>
+              </property>
+           </bean>
+        </property>
+    </bean>
+
+    <!-- AWS credentials. Provide your access key ID and secret access key. -->
+    <bean id="aws.creds" class="com.amazonaws.auth.BasicAWSCredentials">
+      <constructor-arg value="#{systemEnvironment['AWS_ACCESS_KEY_ID']}" />
+      <constructor-arg value="#{systemEnvironment['AWS_SECRET_ACCESS_KEY']}" />
     </bean>
 </beans>
