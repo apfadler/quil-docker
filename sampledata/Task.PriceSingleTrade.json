@@ -1,20 +1,17 @@
 {
-
-	"_Interpreter" : "org.quil.interpreter.XMLTemplateInterpreter",
+	"Interpreter" : "org.quil.interpreter.XmlTemplateInterpreter",
 	"Task"	: "PriceTempTrade",
 	"Template" : "Trade.Swap",
 	"Repository" : "Templates",
-	"Market" : "ExampleMarket",
-	/* No Trade Id because this is a temp trade */
-	
-	/* PriceTrade Task needs TradeData*/
-	"TradeData" : {
-		"ID" : "",
-		"Notional" : "",
-		"Cpty" : ""
+	"MarketData" : { 
+		"Base" :"ExampleMarket",
+		"Additional" : {
+			"EUR_Swap_1Y" : "0.05"
+		}
 	}
-	
-	/* Override individual quotes */
-	"MarketData" : {
+	"TradeData" : {
+		"ID" : "1",
+		"Notional" : "1000.0",
+		"Cpty" : "A"
 	}
 }

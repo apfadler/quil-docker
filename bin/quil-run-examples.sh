@@ -21,4 +21,4 @@ $QUIL_HOME/bin/quil-client.sh simplecache ExampleMarket createFromCSV $QUIL_HOME
 
 $QUIL_HOME/bin/quil-client.sh documentcache ExampleTrades createFromCSV $QUIL_HOME/sampledata/Data.Trades.csv
 
-$QUIL_HOME/bin/quil-client.sh compute task submit $QUIL_HOME/sampledata/Task.PriceTrades.json
+$QUIL_HOME/bin/quil-client.sh compute task submit $QUIL_HOME/sampledata/Task.PriceSingleTrade.json

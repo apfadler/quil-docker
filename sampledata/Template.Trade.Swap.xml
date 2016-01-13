@@ -62,7 +62,7 @@
    </bean>
    
    <bean id="QuoteSwap_1Y" class="org.quantlib.SimpleQuote" lazy-init="true">
-		<constructor-arg index="0" type="double" value="0.08"/>
+		<constructor-arg index="0" type="double" value="#{MD.get('EUR_Swap_1Y')}"/>
    </bean>
    
        <bean id="QuoteSwap_1Y_H" class="org.quantlib.QuoteHandle" lazy-init="true">
@@ -83,7 +83,7 @@
 		<constructor-arg index="6" type="org.quantlib.IborIndex" ref="euribor6m_swap"/>
    </bean>
    
-	<bean id="rateHelpers" class="org.quil.node.RateHelperVectorWrapper" lazy-init="true">
+	<bean id="rateHelpers" class="org.quil.interpreter.Templates.RateHelperVectorWrapper" lazy-init="true">
 		<constructor-arg index="0" type="org.quantlib.RateHelper[]">
 
           <list>
@@ -164,7 +164,7 @@
 	<constructor-arg index="0" ref="termStructure"/>
    </bean>
    
-   <bean id="P" class="org.quil.node.PricingParameters" lazy-init="true">
+   <bean id="P" class="org.quil.interpreter.Templates.Parameters" lazy-init="true">
 		<constructor-arg>  
 		<map>  
             <entry key="Notional"  value="1234.0"></entry>
@@ -172,7 +172,7 @@
 		</constructor-arg>
    </bean>
    
-	<bean id="aScript" class="org.quil.node.ScriptController" lazy-init="true">
+	<bean id="aScript" class="org.quil.interpreter.Templates.ScriptedController" lazy-init="true">
 		<constructor-arg index="0">
 		<value>
           <![CDATA[
@@ -182,7 +182,7 @@
 			import org.springframework.context.ApplicationContext;
 	  		import java.util;
 			import org.apache.ignite.Ignite;
-			import org.quil.node._;
+			import org.quil.interpreter.Templates._;
           
 			class Script extends GenericScalaScript {  
 
@@ -191,15 +191,15 @@
 					val settlementDate = new Date(23, Month.May, 2006);
 					Settings.instance().setEvaluationDate(settlementDate);
 
-					val swap = ctx.getBean("swap").asInstanceOf[VanillaSwap];
-					val Output = ctx.getBean("O").asInstanceOf[PricingParameters];
-
-					val Input = ctx.getBean("P").asInstanceOf[PricingParameters];
-
+					val Input = ctx.getBean("P").asInstanceOf[Parameters];
 					System.out.println("Notional = " + Input.get("Notional"));
 					System.out.println("InputObj = " + Input.toString());
 					System.out.println("ContextObj = " + ctx.toString());
 
+					val swap = ctx.getBean("swap").asInstanceOf[VanillaSwap];
+					val Output = ctx.getBean("O").asInstanceOf[Parameters];
+
+					
 					Output.set("PV", swap.NPV().toString());
 					
 				}
@@ -210,7 +210,7 @@
 		</constructor-arg>
 	</bean>
 	
-	<bean id="O" class="org.quil.node.PricingParameters" lazy-init="true" />
+	<bean id="O" class="org.quil.interpreter.Templates.Parameters" lazy-init="true" />
+	<bean id="MD" class="org.quil.interpreter.Templates.Market" lazy-init="true" />
 
- 
 </beans>
