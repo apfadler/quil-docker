@@ -1,0 +1,11 @@
+{
+	"_Interpreter" : "org.quil.interpreter.XMLTemplateInterpreter",
+	"Task"	: "PriceTrades",
+	"Template" : "Trade.Swap", /* if trade has a template param, then this is overriden */
+	"Repository" : "Templates",
+	"Market" : "ExampleMarket",
+	"TradeSelector" : "" /*  Empty means All Trades */
+	/* Override individual quotes */
+	"MarketData" : {
+	}
+}

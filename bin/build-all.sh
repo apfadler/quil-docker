@@ -22,12 +22,8 @@ cp target/*.jar ../../../quantlib-ignite
 mkdir ../../../quantlib-ignite/libs
 cp -r target/libs/scala* ../../../quantlib-ignite/libs
 
-cp -r ../bin/* ../../../bin
-cp -r ../sampledata ../../../sampledata
-
 echo "Building docker images..."
 cd ../../../bin
-
 
 ./build-ignite-docker-image.sh
 ./build-zeppelin-docker-image.sh
