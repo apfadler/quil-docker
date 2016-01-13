@@ -44,7 +44,7 @@ if [ $1 == "compute" ]; then
 	if [ $2 == "tasks" ]; then
 		curl -s -X GET  -H "Content-Type: application/json" http://$QUIL_SERVER:$QUIL_PORT/api/compute/tasks
 	else
-		curl -s -X POST --data-binary @$3 -H "Content-Type: application/json" http://$QUIL_SERVER:$QUIL_PORT/api/$1/$2/$3
+		curl -s -X POST --data-binary @$4 -H "Content-Type: application/json" http://$QUIL_SERVER:$QUIL_PORT/api/$1/$2/$3
 	fi
 fi
 
