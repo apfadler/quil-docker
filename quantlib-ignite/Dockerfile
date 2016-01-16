@@ -35,7 +35,7 @@ RUN wget http://mirror.dkd.de/apache/ignite/1.4.0/apache-ignite-fabric-1.4.0-bin
     && cp /ignite/libs/optional/ignite-aws/*.jar /ignite/libs
 
 COPY ignite-config.xml /ignite/config/default-config.xml
-COPY libs/*.jar /ignite/libs
+COPY libs/*.jar /ignite/libs/
 
 CMD cd /ignite &&  IGNITE_HOME=/ignite DEFAULT_CONFIG=config/default-config.xml LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/ignite.sh
 
