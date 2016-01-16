@@ -13,9 +13,7 @@ cd quil-src
 git checkout master
 
 echo "Building quil-server..."
-cd server
 mvn clean install
-cd ..
 cp -r dist ../../quantlib-quil-server
 chmod a+x ../../quantlib-quil-server/dist/bin/*.sh
 
