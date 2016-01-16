@@ -28,6 +28,6 @@ COPY dist/bin /quil/bin/
 COPY dist/config /quil/config/
 COPY dist/*.xml /quil
 
-CMD cd /quil && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/quil-server.sh
+CMD cd /quil && JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/quil-server.sh
 
 
