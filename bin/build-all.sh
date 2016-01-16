@@ -27,4 +27,17 @@ cd ../../bin
 ./build-zeppelin-docker-image.sh
 ./build-quil-server-docker-image.sh
 
+
+echo "Cleaning up..."
+cd ..
+cp  build/quil-src/dist/bin/*.sh bin/
+cp -r build/quil-src/dist/sampledata sampledata
+cp -r build/quil-src/dist/libs libs
+cp -r build/quil-src/dist/config config
+cp  build/quil-src/dist/*.xml ./
+
+rm -rf build
+rm -rf quantlib-ignite/libs
+rm -rf quantlib-quil-server/dist
+
 echo "Done"
