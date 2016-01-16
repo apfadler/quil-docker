@@ -15,15 +15,14 @@ git checkout master
 echo "Building quil-server..."
 cd server
 mvn clean install
-cp target/*.jar ../../../quantlib-quil-server
-cp -r target/libs ../../../quantlib-quil-server
+cd ..
+cp -r dist ../../quantlib-quil-server
 
-cp target/*.jar ../../../quantlib-ignite
-mkdir ../../../quantlib-ignite/libs
-cp -r target/libs/scala* ../../../quantlib-ignite/libs
+mkdir ../../quantlib-ignite/libs
+cp -r dist/libs/* ../../quantlib-ignite/libs
 
 echo "Building docker images..."
-cd ../../../bin
+cd ../../bin
 
 ./build-ignite-docker-image.sh
 ./build-zeppelin-docker-image.sh

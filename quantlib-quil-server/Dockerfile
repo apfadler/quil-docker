@@ -21,13 +21,13 @@ RUN wget http://downloads.sourceforge.net/project/quantlib/QuantLib/${quantlib_s
     && make clean && make && make install \
     && cd ..
 
-RUN  mkdir -p /quil/libs  
+RUN  mkdir -p /quil/libs && mkdir -p /quil/bin && mkdir -p /quil/config
 
-COPY server-0.1-SNAPSHOT.jar /quil
-COPY libs/*.jar /quil/libs/
+COPY dist/libs /quil/libs/
+COPY dist/bin /quil/bin/
+COPY dist/config /quil/config/
+COPY dist/*.xml /quil
 
-RUN cp /usr/local/lib/QuantLib.jar /quil/libs
-
-CMD cd /quil && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib java -jar server-0.1-SNAPSHOT.jar 
+CMD cd /quil && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/quil-server.sh
 
 
