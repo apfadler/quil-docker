@@ -17,6 +17,7 @@ cd server
 mvn clean install
 cd ..
 cp -r dist ../../quantlib-quil-server
+chmod a+x ../../quantlib-quil-server/dist/bin/*.sh
 
 mkdir ../../quantlib-ignite/libs
 cp -r dist/libs/* ../../quantlib-ignite/libs
