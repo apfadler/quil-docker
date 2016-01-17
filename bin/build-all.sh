@@ -31,9 +31,9 @@ cd ../../bin
 echo "Cleaning up..."
 cd ..
 cp  build/quil-src/dist/bin/*.sh bin/
-cp -r build/quil-src/dist/sampledata sampledata
-cp -r build/quil-src/dist/libs libs
-cp -r build/quil-src/dist/config config
+cp -r build/quil-src/dist/sampledata ./
+cp -r build/quil-src/dist/libs ./
+cp -r build/quil-src/dist/config ./
 cp  build/quil-src/dist/*.xml ./
 
 rm -rf build
