@@ -26,7 +26,6 @@ RUN  mkdir -p /quil/libs && mkdir -p /quil/bin && mkdir -p /quil/config
 COPY dist/libs /quil/libs/
 COPY dist/bin /quil/bin/
 COPY dist/config /quil/config/
-COPY dist/*.xml /quil
 
 RUN ln -s /tmp /quil/tmp
 
