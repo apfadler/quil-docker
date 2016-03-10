@@ -20,6 +20,9 @@ chmod a+x ../../quantlib-quil-server/dist/bin/*.sh
 mkdir ../../quantlib-ignite/libs
 cp -r dist/libs/* ../../quantlib-ignite/libs
 
+mkdir ../../quantlib-java/libs
+cp -r dist/libs/* ../../quantlib-java/libs
+
 echo "Building docker images..."
 cd ../../bin
 
