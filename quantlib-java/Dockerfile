@@ -27,7 +27,7 @@ RUN wget http://mirror.synyx.de/apache/incubator/zeppelin/0.5.5-incubating/zeppe
     && mv zeppelin-0.5.5-incubating-bin-all /zeppelin \
     && mkdir -p /zeppelin/notebook
 	
-COPY libs/*.jar /zeppelin/lib
+COPY libs/*.jar /zeppelin/lib/
 
 CMD cd /zeppelin && CLASSPATH=/usr/local/lib/QuantLib.jar LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/zeppelin-daemon.sh start && top -b
 
