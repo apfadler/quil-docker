@@ -21,11 +21,12 @@ RUN wget http://downloads.sourceforge.net/project/quantlib/QuantLib/${quantlib_s
     && make clean && make && make install \
     && cd ..
 
-RUN  mkdir -p /quil/libs && mkdir -p /quil/bin && mkdir -p /quil/config
+RUN  mkdir -p /quil/libs && mkdir -p /quil/bin && mkdir -p /quil/config && mkdir -p /quil/sampledata
 
 COPY dist/libs /quil/libs/
 COPY dist/bin /quil/bin/
 COPY dist/config /quil/config/
+COPY dist/sampledata /quil/sampledata/
 
 RUN ln -s /tmp /quil/tmp
 
