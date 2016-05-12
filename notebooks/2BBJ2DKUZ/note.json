@@ -2,7 +2,42 @@
   "paragraphs": [
     {
       "text": "%md\n\u003ch2\u003eCombining Zeppelin, Ignite, and QuantLib\u003c/h2\u003e\n",
-      "dateUpdated": "Jan 10, 2016 3:25:30 PM",
+      "dateUpdated": "May 12, 2016 7:37:04 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1452437285037_-1410984338",
+      "id": "20160110-144805_947597523",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch2\u003eCombining Zeppelin, Ignite, and QuantLib\u003c/h2\u003e\n"
+      },
+      "dateCreated": "Jan 10, 2016 2:48:05 PM",
+      "dateStarted": "Apr 14, 2016 3:21:38 PM",
+      "dateFinished": "Apr 14, 2016 3:21:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003ch3\u003eConnecting to the cluster\u003c/h3\u003e",
+      "dateUpdated": "May 12, 2016 7:38:34 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -21,22 +56,22 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1452437285037_-1410984338",
-      "id": "20160110-144805_947597523",
+      "jobName": "paragraph_1463081886438_1007547307",
+      "id": "20160512-193806_318733434",
       "result": {
         "code": "SUCCESS",
         "type": "HTML",
-        "msg": "\u003ch2\u003eCombining Zeppelin, Ignite, and QuantLib\u003c/h2\u003e\n"
+        "msg": "\u003ch3\u003eConnecting to the cluster\u003c/h3\u003e\n"
       },
-      "dateCreated": "Jan 10, 2016 2:48:05 PM",
-      "dateStarted": "Jan 10, 2016 3:25:30 PM",
-      "dateFinished": "Jan 10, 2016 3:25:31 PM",
+      "dateCreated": "May 12, 2016 7:38:06 PM",
+      "dateStarted": "May 12, 2016 7:38:31 PM",
+      "dateFinished": "May 12, 2016 7:38:31 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%ignite\n\n// Import ignite libs\n\nimport org.apache.ignite.cluster.ClusterNode\nimport org.apache.ignite.scalar.scalar\nimport org.apache.ignite.scalar.scalar._\nimport scala.collection.JavaConversions._\n",
-      "dateUpdated": "Jan 10, 2016 4:04:23 PM",
+      "dateUpdated": "May 12, 2016 7:35:55 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -62,14 +97,14 @@
         "msg": "import org.apache.ignite.cluster.ClusterNode\nimport org.apache.ignite.scalar.scalar\nimport org.apache.ignite.scalar.scalar._\nimport scala.collection.JavaConversions._\n"
       },
       "dateCreated": "Jan 10, 2016 3:26:22 PM",
-      "dateStarted": "Jan 10, 2016 4:04:23 PM",
-      "dateFinished": "Jan 10, 2016 4:04:24 PM",
+      "dateStarted": "May 12, 2016 7:35:55 PM",
+      "dateFinished": "May 12, 2016 7:36:02 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%ignite\n\n// Some basic cluster info\n\nprintln(\"Number of client nodes: \" + ignite$.cluster().nodes().filter( n \u003d\u003e n.isClient() ).size()  )\nprintln(\"Number of server nodes: \" + ignite$.cluster().nodes().filter( n \u003d\u003e !n.isClient() ).size() )\nprintln(\"Number of cpus: \" + ignite$.cluster().metrics().getTotalCpus() )",
-      "dateUpdated": "Jan 10, 2016 4:06:52 PM",
+      "dateUpdated": "May 12, 2016 7:36:19 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -95,14 +130,49 @@
         "msg": "Number of client nodes: 1\nNumber of server nodes: 1\nNumber of cpus: 2\n"
       },
       "dateCreated": "Jan 10, 2016 3:26:44 PM",
-      "dateStarted": "Jan 10, 2016 4:06:52 PM",
-      "dateFinished": "Jan 10, 2016 4:06:52 PM",
+      "dateStarted": "May 12, 2016 7:36:19 PM",
+      "dateFinished": "May 12, 2016 7:36:20 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%ignite\n\n\nignite$.compute().call(() \u003d\u003e {\n    \n    import org.quantlib._\n    \n    val dayCounter     \u003d new ActualActual();\n\tval settlementDate \u003d new Date(27, Month.December, 2004);\n\tSettings.instance().setEvaluationDate(settlementDate);\n\n\tval exerciseDate \u003d new Date(28, Month.March, 2005);\n\tval maturity \u003d dayCounter.yearFraction(settlementDate, exerciseDate);\n\n\tval payoff \u003d new PlainVanillaPayoff(Option.Type.Call, 1.05);\n\tval exercise \u003d new EuropeanExercise(exerciseDate);\n\tval vanillaOption \u003d new VanillaOption(payoff, exercise);\n\n\tval rTS \u003d new YieldTermStructureHandle(\n\tnew FlatForward(settlementDate, 0.0225, dayCounter));\n\n\tval divTS \u003d new YieldTermStructureHandle(\n\tnew FlatForward(settlementDate, 0.02, dayCounter));\n\n\tval s0 \u003d new QuoteHandle(new SimpleQuote(1.0));\n\n\tval v0    \u003d  0.1;\n\tval kappa \u003d  3.16;\n\tval theta \u003d  0.09;\n\tval sigma \u003d  0.4;\n\tval rho   \u003d -0.2;\n\n\tval hestonProcess \u003d new HestonProcess(rTS, divTS, s0, v0, \n\tkappa, theta, sigma, rho);\n\n\tval hestonModel \u003d new HestonModel(hestonProcess);\n\tval analyticEngine \u003d new AnalyticHestonEngine(hestonModel);\n\tvanillaOption.setPricingEngine(analyticEngine);\n\n    vanillaOption.NPV()\n})",
-      "dateUpdated": "Jan 10, 2016 4:03:40 PM",
+      "text": "%md\n\u003ch3\u003eRunning a simple Quantlib calculation on the cluster\u003c/h3\u003e",
+      "dateUpdated": "May 12, 2016 7:37:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "tableHide": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463081794996_-714558121",
+      "id": "20160512-193634_1859203454",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003eRunning a simple Quantlib calculation on the cluster\u003c/h3\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:36:34 PM",
+      "dateStarted": "May 12, 2016 7:37:40 PM",
+      "dateFinished": "May 12, 2016 7:37:41 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\n\nignite$.compute().call(() \u003d\u003e {\n    \n    import org.quantlib._\n    \n    val dayCounter     \u003d new ActualActual();\n\tval settlementDate \u003d new Date(27, Month.December, 2004);\n\tSettings.instance().setEvaluationDate(settlementDate);\n\n\tval exerciseDate \u003d new Date(28, Month.March, 2005);\n\tval maturity \u003d dayCounter.yearFraction(settlementDate, exerciseDate);\n\n\tval payoff \u003d new PlainVanillaPayoff(Option.Type.Call, 1.05);\n\tval exercise \u003d new EuropeanExercise(exerciseDate);\n\tval vanillaOption \u003d new VanillaOption(payoff, exercise);\n\n\tval rTS \u003d new YieldTermStructureHandle(\n\tnew FlatForward(settlementDate, 0.0225, dayCounter));\n\n\tval divTS \u003d new YieldTermStructureHandle(\n\tnew FlatForward(settlementDate, 0.02, dayCounter));\n\n\tval s0 \u003d new QuoteHandle(new SimpleQuote(1.0));\n\n\tval v0    \u003d  0.2;\n\tval kappa \u003d  3.16;\n\tval theta \u003d  0.09;\n\tval sigma \u003d  0.4;\n\tval rho   \u003d -0.2;\n\n\tval hestonProcess \u003d new HestonProcess(rTS, divTS, s0, v0, \n\tkappa, theta, sigma, rho);\n\n\tval hestonModel \u003d new HestonModel(hestonProcess);\n\tval analyticEngine \u003d new AnalyticHestonEngine(hestonModel);\n\tvanillaOption.setPricingEngine(analyticEngine);\n\n    vanillaOption.NPV()\n})",
+      "dateUpdated": "May 12, 2016 7:38:42 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -125,16 +195,86 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "res158: Double \u003d 0.04047745149137422\n"
+        "msg": "res17: Double \u003d 0.05935274165035592\n"
       },
       "dateCreated": "Jan 10, 2016 3:16:25 PM",
-      "dateStarted": "Jan 10, 2016 4:03:40 PM",
-      "dateFinished": "Jan 10, 2016 4:03:40 PM",
+      "dateStarted": "May 12, 2016 7:38:42 PM",
+      "dateFinished": "May 12, 2016 7:38:42 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "dateUpdated": "Jan 10, 2016 3:25:30 PM",
+      "text": "%md\n\u003ch3\u003eAdding trade and market data\u003c/h3\u003e",
+      "dateUpdated": "May 12, 2016 8:03:19 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082044715_-1270552575",
+      "id": "20160512-194044_26065314",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003eAdding trade and market data \u003c/h3\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:40:44 PM",
+      "dateStarted": "May 12, 2016 8:02:13 PM",
+      "dateFinished": "May 12, 2016 8:02:13 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003cb\u003eCreating a simpley key/value cache for market data and a generic JSON document cache to hold trade data\u003c/b\u003e",
+      "dateUpdated": "May 12, 2016 8:03:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "tableHide": false,
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082755306_76315931",
+      "id": "20160512-195235_1192865600",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003e\u003cb\u003eCreating a simpley key/value cache for market data and a generic JSON document cache to hold trade data\u003c/b\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:52:35 PM",
+      "dateStarted": "May 12, 2016 8:02:47 PM",
+      "dateFinished": "May 12, 2016 8:02:47 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nimport org.quil.server.DocumentCache\nimport org.quil.server.SimpleCache\nimport org.quil.JSON._\n\nvar MarketData \u003d SimpleCache.getOrCreate(\"Market\")\n\nMarketData.put(\"EUR_Swap_1Y\", \"0.01\")\nMarketData.put(\"EUR_Swap_2Y\", \"0.03\")\nMarketData.put(\"EUR_Swap_3Y\", \"0.04\")\nMarketData.put(\"EUR_Swap_5Y\", \"0.05\")\nMarketData.put(\"EUR_Swap_10Y\", \"0.04\")\n\nvar TradeData \u003d DocumentCache.getOrCreate(\"Trade\")\n\nTradeData.put(\"Trade_1\", Document(Map( \"ID\" -\u003e \"Trade_1\", \"Notional\" -\u003e \"100.0\", \"Counterparty\" -\u003e \"A-Bank\")))",
+      "dateUpdated": "May 12, 2016 7:48:39 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -152,15 +292,482 @@
         "params": {},
         "forms": {}
       },
-      "jobName": "paragraph_1452438991585_-1949816688",
-      "id": "20160110-151631_1596164695",
+      "jobName": "paragraph_1463082091087_-520014740",
+      "id": "20160512-194131_653670300",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.quil.server.DocumentCache\nimport org.quil.server.SimpleCache\nimport org.quil.JSON._\nMarketData: org.quil.server.SimpleCache \u003d org.quil.server.SimpleCache@4115185b\nTradeData: org.quil.server.DocumentCache \u003d org.quil.server.DocumentCache@34aab9eb\n"
+      },
+      "dateCreated": "May 12, 2016 7:41:31 PM",
+      "dateStarted": "May 12, 2016 7:48:39 PM",
+      "dateFinished": "May 12, 2016 7:48:40 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003cb\u003eRun SQL queries on the caches\u003c/b\u003e",
+      "dateUpdated": "May 12, 2016 7:55:11 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082825577_1092681318",
+      "id": "20160512-195345_1559360642",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003e\u003cb\u003eRun SQL queries on the caches\u003c/b\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:53:45 PM",
+      "dateStarted": "May 12, 2016 7:55:06 PM",
+      "dateFinished": "May 12, 2016 7:55:06 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite.ignitesql\n\nselect * from \"Market\".String",
+      "dateUpdated": "May 12, 2016 7:48:50 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "_KEY",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "_VAL",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "_KEY",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "_VAL",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082464225_562408678",
+      "id": "20160512-194744_573072589",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "_KEY\t_VAL\nEUR_Swap_10Y\t0.04\nEUR_Swap_1Y\t0.01\nEUR_Swap_2Y\t0.03\nEUR_Swap_3Y\t0.04\nEUR_Swap_5Y\t0.05\n"
+      },
+      "dateCreated": "May 12, 2016 7:47:44 PM",
+      "dateStarted": "May 12, 2016 7:48:43 PM",
+      "dateFinished": "May 12, 2016 7:48:43 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite.ignitesql\n\nselect * from \"Trade\".ComplexElement where _val like \u0027%A%\u0027",
+      "dateUpdated": "May 12, 2016 7:56:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "_KEY",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "_VAL",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "_KEY",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": "_VAL",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082539064_2015913401",
+      "id": "20160512-194859_677167993",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "_KEY\t_VAL\nTrade_1\t{\"ID\" : \"Trade_1\", \"Notional\" : \"100.0\", \"Counterparty\" : \"A-Bank\"}\n"
+      },
+      "dateCreated": "May 12, 2016 7:48:59 PM",
+      "dateStarted": "May 12, 2016 7:56:25 PM",
+      "dateFinished": "May 12, 2016 7:56:25 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003cb\u003eQuery JSON cache using a lambda as predicate\u003c/b\u003e",
+      "dateUpdated": "May 12, 2016 7:56:12 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082935455_1715574463",
+      "id": "20160512-195535_336127067",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003e\u003cb\u003eQuery JSON cache using a lambda as predicate\u003c/b\u003e\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:55:35 PM",
+      "dateStarted": "May 12, 2016 7:56:08 PM",
+      "dateFinished": "May 12, 2016 7:56:08 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nTradeData.filter( (K:String,V:Document) \u003d\u003e V.Counterparty.asString\u003d\u003d \"A-Bank\")",
+      "dateUpdated": "May 12, 2016 7:52:12 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082614682_-1976767142",
+      "id": "20160512-195014_1804386175",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res75: java.util.List[org.quil.JSON.Document] \u003d [{\"ID\" : \"Trade_1\", \"Notional\" : \"100.0\", \"Counterparty\" : \"A-Bank\"}]\n"
+      },
+      "dateCreated": "May 12, 2016 7:50:14 PM",
+      "dateStarted": "May 12, 2016 7:52:12 PM",
+      "dateFinished": "May 12, 2016 7:52:12 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003cb\u003eLoad a pricing template from a XML file and add it to another cache",
+      "dateUpdated": "May 12, 2016 8:09:37 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463083408036_121230861",
+      "id": "20160512-200328_1490170648",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003cp\u003e\u003cb\u003eLoad a pricing template from a XML file and add it to another cache\u003c/p\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 8:03:28 PM",
+      "dateStarted": "May 12, 2016 8:09:37 PM",
+      "dateFinished": "May 12, 2016 8:09:37 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nimport scala.io.Source._\n\nvar template \u003d scala.io.Source.fromURL(\"https://raw.githubusercontent.com/apfadler/quil-src/master/dist/sampledata/Template.Trade.Swap.xml\").mkString\n\nvar Templates \u003d SimpleCache.getOrCreate(\"Template\")\n\nTemplates.put(\"Trade.Swap\", template)",
+      "dateUpdated": "May 12, 2016 8:10:56 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463083478782_-1281255501",
+      "id": "20160512-200438_85898019",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import scala.io.Source._\ntemplate: String \u003d \n\u003c?xml version\u003d\"1.0\" encoding\u003d\"UTF-8\"?\u003e\n\u003c!-- Example Template for Vanilla Swap Pricing --\u003e\n\n\u003cbeans xmlns\u003d\"http://www.springframework.org/schema/beans\"\n    xmlns:xsi\u003d\"http://www.w3.org/2001/XMLSchema-instance\"\n    xsi:schemaLocation\u003d\"http://www.springframework.org/schema/beans\n    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd\"\u003e\n\n   \n   \u003cbean id\u003d\"CalTarget\" class\u003d\"org.quantlib.TARGET\" lazy-init\u003d\"true\"\u003e\n   \u003c/bean\u003e\n   \n   \u003cbean id\u003d\"todaysDate\" class\u003d\"org.quantlib.Date\" lazy-init\u003d\"true\"\u003e\n\t\t\u003cconstructor-arg index\u003d\"0\" type\u003d\"int\" value\u003d\"23\"/\u003e\n\t\t\u003cconstructor-arg index\u003d\"1\" type\u003d\"Month\" value\u003d\"May\"/\u003e\n\t\t\u003cconstructor-arg index\u003d\"2\" type \u003d\"int\" value\u003d\"2006\"/\u003e\n   \u003c/bean\u003e\n   \n   \u003cbean id\u003d\"settlementDate\" class\u003d\"org.quantlib.Date\" lazy-init\u003d\"true\"\u003e\n\t\t\u003cconstructor-arg...Templates: org.quil.server.SimpleCache \u003d org.quil.server.SimpleCache@745f5e90\n"
+      },
+      "dateCreated": "May 12, 2016 8:04:38 PM",
+      "dateStarted": "May 12, 2016 8:10:56 PM",
+      "dateFinished": "May 12, 2016 8:10:57 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003ch3\u003ePricing a trade by submitting a pricing task to the grid using QUIL API\u003c/h3\u003e",
+      "dateUpdated": "May 12, 2016 8:13:24 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463081934884_-1661963155",
+      "id": "20160512-193854_1618047676",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003ePricing a trade by submitting a pricing task to the grid using QUIL API\u003c/h3\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:38:54 PM",
+      "dateStarted": "May 12, 2016 8:13:20 PM",
+      "dateFinished": "May 12, 2016 8:13:20 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nimport org.quil.server._\nimport org.quil.server.Tasks._\n\nvar taskDescription  \u003d \"\"\"\n\n{\n\t\"Interpreter\" : \"org.quil.interpreter.QuantLibTemplates.QuantLibXmlTemplateInterpreter\",\n\t\"Task\"\t: \"PriceTrade\",\n\t\"Template\" : \"Trade.Swap\",\n\t\"Repository\" : \"Template\",\n\t\"MarketData\" : { \n\t\t\"Base\" :\"Market\",\n\t\t\"Additional\" : {\n\t\t\t\"EUR_Swap_1Y\" : \"0.08\"\n\t\t}\n\t}\n\t\"TradeData\" : {\n\t\t\"ID\" : \"1\",\n\t\t\"Notional\" : \"2000.0\",\n\t\t\"Cpty\" : \"A\"\n\t}\n}\n\n\"\"\";\n\nvar T \u003d Task.fromString(taskDescription);\nTaskRunner.runTask(T);\n",
+      "dateUpdated": "May 12, 2016 8:13:26 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala",
+        "editorHide": false,
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1460120190989_143769506",
+      "id": "20160408-125630_1302680931",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.quil.server._\nimport org.quil.server.Tasks._\ntaskDescription: String \u003d \n\"\n\n{\n\t\"Interpreter\" : \"org.quil.interpreter.QuantLibTemplates.QuantLibXmlTemplateInterpreter\",\n\t\"Task\"\t: \"PriceTrade\",\n\t\"Template\" : \"Trade.Swap\",\n\t\"Repository\" : \"Template\",\n\t\"MarketData\" : { \n\t\t\"Base\" :\"Market\",\n\t\t\"Additional\" : {\n\t\t\t\"EUR_Swap_1Y\" : \"0.08\"\n\t\t}\n\t}\n\t\"TradeData\" : {\n\t\t\"ID\" : \"1\",\n\t\t\"Notional\" : \"2000.0\",\n\t\t\"Cpty\" : \"A\"\n\t}\n}\n\n\"\nT: org.quil.server.Tasks.Task \u003d org.quil.server.Tasks.PriceTrade@20879228\n"
+      },
+      "dateCreated": "Apr 8, 2016 12:56:30 PM",
+      "dateStarted": "May 12, 2016 8:13:26 PM",
+      "dateFinished": "May 12, 2016 8:13:27 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md\n\u003ch3\u003eQuerying the results cache using Ignite SQL\u003c/h3\u003e",
+      "dateUpdated": "May 12, 2016 7:40:21 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1463082000366_-1466233234",
+      "id": "20160512-194000_1493667170",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003eQuerying the results cache using Ignite SQL\u003c/h3\u003e\n"
+      },
+      "dateCreated": "May 12, 2016 7:40:00 PM",
+      "dateStarted": "May 12, 2016 7:40:17 PM",
+      "dateFinished": "May 12, 2016 7:40:17 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite.ignitesql\n\n\nselect _key, _taskresult from PriceTrade",
+      "dateUpdated": "May 12, 2016 8:13:31 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "_KEY",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": "_TASKRESULT",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "_KEY",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala",
+        "title": false,
+        "editorHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1460120378138_-278856641",
+      "id": "20160408-125938_150862359",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "_KEY\t_TASKRESULT\n41af227a-7c51-4bee-8f06-0541bf65e4a1\t\n777e9ea7-08fe-4863-9850-cf29b33d7478\t{\"PV\":\"33.18827548497357\"}\n99b3abe3-7dac-42eb-858f-2390dee667d2\t\ne96eb180-ac02-432f-a831-2ed58446dd0c\t{\"PV\":\"33.18827548497357\"}\n"
+      },
+      "dateCreated": "Apr 8, 2016 12:59:38 PM",
+      "dateStarted": "May 12, 2016 8:13:31 PM",
+      "dateFinished": "May 12, 2016 8:13:31 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "dateUpdated": "Apr 14, 2016 3:21:37 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1460386377901_1984595708",
+      "id": "20160411-145257_899306704",
       "result": {
         "code": "SUCCESS",
         "type": "TEXT"
       },
-      "dateCreated": "Jan 10, 2016 3:16:31 PM",
-      "dateStarted": "Jan 10, 2016 3:25:30 PM",
-      "dateFinished": "Jan 10, 2016 3:25:56 PM",
+      "dateCreated": "Apr 11, 2016 2:52:57 PM",
+      "dateStarted": "Apr 14, 2016 3:21:39 PM",
+      "dateFinished": "Apr 14, 2016 3:22:10 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
@@ -168,19 +775,19 @@
   "name": "Ignite Example",
   "id": "2BBJ2DKUZ",
   "angularObjects": {
-    "2BBBFJGVV": [],
-    "2B96JM8U6": [],
-    "2BBGQ5B3X": [],
-    "2BBHXCC31": [],
-    "2BASP56B1": [],
-    "2BAYPR4VU": [],
-    "2B85ANT1D": [],
-    "2BA3JB1XC": [],
-    "2B8CTZ5WY": [],
-    "2BA4CKBMU": [],
-    "2B82HFPAJ": [],
-    "2BAJZA2JW": [],
-    "2B9CPRGV5": []
+    "2BKGA13CU": [],
+    "2BNHDTKQP": [],
+    "2BJ8C7ZZG": [],
+    "2BKD2U9D4": [],
+    "2BMEDTAW9": [],
+    "2BHW1K32Q": [],
+    "2BJHKW7PH": [],
+    "2BKBEECG9": [],
+    "2BJJSTRD2": [],
+    "2BMUGB9BZ": [],
+    "2BJW2V584": [],
+    "2BJM75MTR": [],
+    "2BHPN1K92": []
   },
   "config": {
     "looknfeel": "default"
