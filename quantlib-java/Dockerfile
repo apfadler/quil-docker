@@ -29,6 +29,7 @@ RUN wget http://mirror.synyx.de/apache/incubator/zeppelin/0.5.5-incubating/zeppe
 	
 COPY libs/server-0.1-SNAPSHOT.jar /zeppelin/lib/server-0.1-SNAPSHOT.jar
 COPY libs/json-simple-1.1.1.jar /zeppelin/lib/json-simple-1.1.1.jar
+COPY interpreter.json /zeppelin/conf/interpreter.json
 
 CMD cd /zeppelin && CLASSPATH=/usr/local/lib/QuantLib.jar LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/zeppelin-daemon.sh start && top -b
 
