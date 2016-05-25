@@ -26,6 +26,8 @@ cp -r dist/libs/* ../../quantlib-java/libs
 echo "Building docker images..."
 cd ../../bin
 
+./build-quantlib-docker-image.sh
+./build-quantlib-java-docker-image.sh
 ./build-ignite-docker-image.sh
 ./build-zeppelin-docker-image.sh
 ./build-quil-server-docker-image.sh
