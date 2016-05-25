@@ -3,7 +3,7 @@ MAINTAINER Andreas Pfadler <andreas.pfadler@gmail.com>
 LABEL Description="An environment with the QuantLib Java module"
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk automake swig \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-8-jdk automake swig \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
