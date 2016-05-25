@@ -2,6 +2,11 @@ FROM apfadler/quantlib-java
 MAINTAINER Andreas Pfadler <andreas.pfadler@gmail.com>
 LABEL Description="An environment with the QuantLib Java module and Apache Ignite QUIL Node"
 
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y unzip \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 RUN wget https://archive.apache.org/dist/ignite/1.4.0/apache-ignite-fabric-1.4.0-bin.zip \
     && unzip apache-ignite-fabric-1.4.0-bin.zip \
     && rm apache-ignite-fabric-1.4.0-bin.zip \

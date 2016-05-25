@@ -21,7 +21,7 @@ mkdir ../../quantlib-ignite/libs
 cp -r dist/libs/* ../../quantlib-ignite/libs
 
 mkdir ../../quantlib-java/libs
-cp -r dist/libs/* ../../quantlib-java/libs
+cp -r dist/libs/* ../../quantlib-zeppelin/libs
 
 echo "Building docker images..."
 cd ../../bin
