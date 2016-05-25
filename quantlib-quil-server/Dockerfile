@@ -11,6 +11,6 @@ COPY dist/sampledata /quil/sampledata/
 
 RUN ln -s /tmp /quil/tmp
 
-CMD cd /quil && JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/quil-server.sh
+CMD cd /quil && JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/quil-server.sh
 
 
