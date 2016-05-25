@@ -12,12 +12,11 @@ ENV quantlib_swig_version ${quantlib_swig_version}
 
 COPY PatchedJavaMakefile.am /PatchedJavaMakefile.am
 
-RUN wget http://downloads.sourceforge.net/project/quantlib/QuantLib/${quantlib_swig_version}/other\ languages/QuantLib-SWIG-${quantlib_swig_version}.tar.gz \
-    && tar xfz QuantLib-SWIG-${quantlib_swig_version}.tar.gz \
-    && rm QuantLib-SWIG-${quantlib_swig_version}.tar.gz \
-    && cd QuantLib-SWIG-${quantlib_swig_version} \
+RUN git clone https://github.com/apfadler/QuantLib-SWIG.git \
+	&& cd QuantLib-SWIG && git checkout v1.7.x  \
     && mv /PatchedJavaMakefile.am Java/Makefile.am \
-    && ./configure --disable-perl --disable-ruby --disable-mzscheme --disable-guile --disable-csharp --disable-ocaml --disable-r --disable-python --with-jdk-include=/usr/lib/jvm/java-7-openjdk-amd64/include --with-jdk-system-include=/usr/lib/jvm/java-7-openjdk-amd64/include/linux CXXFLAGS=-O3 \
+	&& sh ./autogen.sh \
+    && ./configure --disable-perl --disable-ruby --disable-mzscheme --disable-guile --disable-csharp --disable-ocaml --disable-r --disable-python --with-jdk-include=/usr/lib/jvm/java-8-openjdk-amd64/include --with-jdk-system-include=/usr/lib/jvm/java-8-openjdk-amd64/include/linux CXXFLAGS=-O3 \
     && make clean && make && make install \
     && cd ..
 
