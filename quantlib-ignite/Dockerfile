@@ -7,7 +7,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://archive.apache.org/dist/ignite/1.4.0/apache-ignite-fabric-1.4.0-bin.zip \
+RUN wget https://archive.apache.org/dist/ignite/1.5.0.final/apache-ignite-fabric-1.5.0.final-bin.zip \
     && unzip apache-ignite-fabric-1.4.0-bin.zip \
     && rm apache-ignite-fabric-1.4.0-bin.zip \
     && mv apache-ignite-fabric-1.4.0-bin /ignite \
