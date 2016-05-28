@@ -7,10 +7,9 @@ RUN apt-get update && apt-get install -y maven
 RUN git clone https://github.com/apfadler/incubator-zeppelin.git \
     && cd incubator-zeppelin \
 	&& git checkout branch-0.5.5  \
-	&& mvn clean package -DskipTests -Dignite.version=1.5.0.final -Pbuild-distr
- 
-RUN cp /incubator-zeppelin/zeppelin-distribution/target/zeppelin-0.5.5-incubating*gz / \
-    && tar zxfv zeppelin*gz &&  mv zeppelin-0.5.5-incubating zeppelin \
+	&& mvn clean package -DskipTests -Dignite.version=1.5.0.final -Pbuild-distr \
+    && cp /incubator-zeppelin/zeppelin-distribution/target/zeppelin-0.5.5-incubating*gz / \
+    && tar zxfv zeppelin*gz &&  mv zeppelin-0.5.5-incubating zeppelin && rm /zeppelin*gz \
     && mkdir -p /zeppelin/notebook && rm -rf /incubator-zeppelin
 	
 COPY libs/server-0.1-SNAPSHOT.jar /zeppelin/lib/server-0.1-SNAPSHOT.jar
