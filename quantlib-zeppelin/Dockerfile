@@ -18,8 +18,10 @@ COPY libs/json-simple-1.1.1.jar /zeppelin/lib/json-simple-1.1.1.jar
 
 COPY libs/spray-json_2.10-1.3.2.jar /zeppelin/lib/spray-json_2.10-1.3.2.jar
 
+COPY libs/quantlib-1.7.jar /zeppelin/lib/quantlib-1.7.jar
+
 COPY interpreter.json /zeppelin/conf/interpreter.json
 
-CMD cd /zeppelin && CLASSPATH=/usr/local/lib/QuantLib.jar LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib bin/zeppelin-daemon.sh start && top -b
+CMD cd /zeppelin && LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib bin/zeppelin-daemon.sh start && top -b
 
 
