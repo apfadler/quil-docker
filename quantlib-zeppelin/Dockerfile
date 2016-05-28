@@ -2,10 +2,13 @@ FROM apfadler/quantlib-java
 MAINTAINER Andreas Pfadler <andreas.pfadler@gmail.com>
 LABEL Description="An environment with the QuantLib Java module and Apache Zeppelin notebook"
 
-RUN wget http://apache.openmirror.de/incubator/zeppelin/0.5.6-incubating/zeppelin-0.5.6-incubating-bin-all.tgz \
-    && tar zxfv zeppelin-0.5.6-incubating-bin-all.tgz \
-    && rm zeppelin-0.5.6-incubating-bin-all.tgz \
-    && mv zeppelin-0.5.6-incubating-bin-all /zeppelin \
+RUN apt-get update && apt-get install -y maven
+
+RUN git clone https://github.com/apfadler/incubator-zeppelin.git \
+    && cd incubator-zeppelin \
+	&& git checkout branch-0.5.5  \
+	&& mvn clean package -DskipTests -Dignite.version=1.5.0.final -Pbuild-distr \
+	&& mv /incubator-zeppelin/zeppelin-distribution/target/zeppelin-0.5.5-incubating /zeppelin \
     && mkdir -p /zeppelin/notebook
 	
 COPY libs/server-0.1-SNAPSHOT.jar /zeppelin/lib/server-0.1-SNAPSHOT.jar
