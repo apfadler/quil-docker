@@ -14,6 +14,18 @@ RUN git clone https://github.com/apfadler/incubator-zeppelin.git \
 	
 COPY libs/server-0.1-SNAPSHOT.jar /zeppelin/lib/server-0.1-SNAPSHOT.jar
 
+COPY libs/common-0.1-SNAPSHOT.jar /zeppelin/lib/common-0.1-SNAPSHOT.jar
+
+COPY libs/interpreter-0.1-SNAPSHOT.jar /zeppelin/lib/interpreter-0.1-SNAPSHOT.jar
+
+COPY libs/qlobjects-0.1-SNAPSHOT.jar /zeppelin/lib/qlobjects-0.1-SNAPSHOT.jar
+
+COPY libs/scala-macros-0.1-SNAPSHOT.jar /zeppelin/lib/scala-macros-0.1-SNAPSHOT.jar
+
+COPY libs/json4s-ast_2.11-3.3.0.jar /zeppelin/lib/json4s-ast_2.11-3.3.0.jar
+
+COPY libs/json4s-core_2.11-3.3.0.jar /zeppelin/lib/json4s-core_2.11-3.3.0.jar
+
 COPY libs/json-simple-1.1.1.jar /zeppelin/lib/json-simple-1.1.1.jar
 
 COPY libs/spray-json_2.10-1.3.2.jar /zeppelin/lib/spray-json_2.10-1.3.2.jar
