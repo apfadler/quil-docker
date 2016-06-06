@@ -26,6 +26,10 @@ COPY libs/json4s-ast_2.11-3.3.0.jar /zeppelin/lib/json4s-ast_2.11-3.3.0.jar
 
 COPY libs/json4s-core_2.11-3.3.0.jar /zeppelin/lib/json4s-core_2.11-3.3.0.jar
 
+COPY libs/json4s-native_2.11-3.3.0.jar /zeppelin/lib/json4s-native_2.11-3.3.0.jar
+
+COPY libs/json4s-scalap_2.11-3.3.0.jar /zeppelin/lib/json4s-scalap_2.11-3.3.0.jar
+
 COPY libs/json-simple-1.1.1.jar /zeppelin/lib/json-simple-1.1.1.jar
 
 COPY libs/spray-json_2.10-1.3.2.jar /zeppelin/lib/spray-json_2.10-1.3.2.jar
