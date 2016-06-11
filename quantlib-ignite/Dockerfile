@@ -8,9 +8,9 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://archive.apache.org/dist/ignite/1.5.0.final/apache-ignite-fabric-1.5.0.final-bin.zip \
-    && unzip apache-ignite-fabric-1.4.0-bin.zip \
-    && rm apache-ignite-fabric-1.4.0-bin.zip \
-    && mv apache-ignite-fabric-1.4.0-bin /ignite \
+    && unzip apache-ignite-fabric-1.5.0.final-bin.zip \
+    && rm apache-ignite-fabric-1.5.0.final-bin.zip \
+    && mv apache-ignite-fabric-1.5.0.final-bin /ignite \
     && cp /usr/local/lib/QuantLib.jar /ignite/libs \
     && cp /ignite/libs/optional/ignite-aws/*.jar /ignite/libs
 

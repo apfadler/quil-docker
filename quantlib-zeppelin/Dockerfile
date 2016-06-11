@@ -4,6 +4,8 @@ LABEL Description="An environment with the QuantLib Java module and Apache Zeppe
 
 RUN apt-get update && apt-get install -y maven
 
+RUN ls
+
 RUN git clone https://github.com/apfadler/incubator-zeppelin.git \
     && cd incubator-zeppelin \
 	&& git checkout branch-0.5.5  \
