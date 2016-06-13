@@ -4,7 +4,7 @@ LABEL Description="An environment with the QuantLib Java module and Apache Zeppe
 
 RUN apt-get update && apt-get install -y maven
 
-RUN git clone https://github.com/apfadler/incubator-zeppelin.git \
+RUN ls && git clone https://github.com/apfadler/incubator-zeppelin.git \
     && cd incubator-zeppelin \
 	&& git checkout branch-0.5.5  \
 	&& mvn clean package -DskipTests -Dignite.version=1.6.0 -Pbuild-distr \
@@ -37,8 +37,6 @@ COPY libs/spray-json_2.10-1.3.2.jar /zeppelin/interpreter/ignite/spray-json_2.10
 COPY libs/quantlib-1.7.jar /zeppelin/interpreter/ignite/quantlib-1.7.jar
 
 COPY interpreter.json /zeppelin/conf/interpreter.json
-
-COPY dist/config/*.xml /
 
 CMD cd /zeppelin && JAVA_OPTS=" -DIGNITE_QUIET=false " LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib bin/zeppelin-daemon.sh start && top -b
 
