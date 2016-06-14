@@ -14,24 +14,26 @@ git checkout master
 
 echo "Building quil-server..."
 mvn clean install
+
+echo "Building docker images..."
 cp -r dist ../../quantlib-quil-server
 chmod a+x ../../quantlib-quil-server/dist/bin/*.sh
-
-mkdir ../../quantlib-ignite/libs
-cp -r dist/libs/* ../../quantlib-ignite/libs
+cp -r dist ../../quantlib-quil-worker
+chmod a+x ../../quantlib-quil-worker/dist/bin/*.sh
+cp -r dist ../../quantlib-quil-aws-worker
+chmod a+x ../../quantlib-quil-aws-worker/dist/bin/*.sh
 
 mkdir ../../quantlib-zeppelin/libs
 cp -r dist/libs/* ../../quantlib-zeppelin/libs
 
-echo "Building docker images..."
-cd ../../bin
 
+cd ../../bin
 ./build-quantlib-docker-image.sh
 ./build-quantlib-java-docker-image.sh
-./build-ignite-docker-image.sh
-./build-zeppelin-docker-image.sh
+./build-quil-worker-docker-image.sh
+./build-quil-aws-worker-docker-image.sh
 ./build-quil-server-docker-image.sh
-
+./build-zeppelin-docker-image.sh
 
 echo "Cleaning up..."
 cd ..
@@ -42,7 +44,8 @@ cp -r build/quil-src/dist/config ./
 cp  build/quil-src/dist/*.xml ./
 
 rm -rf build
-rm -rf quantlib-ignite/libs
+rm -rf quantlib-quil-worker/libs
+rm -rf quantlib-quil-aws-worker/libs
 rm -rf quantlib-quil-server/dist
 
 echo "Done"
