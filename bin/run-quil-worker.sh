@@ -1,4 +1,3 @@
 #!/bin/sh
 
-docker run -d -e "QUIL_WORKER=true"  \
-			  --net="host" apfadler/quantlib-quil-server
+docker run -d  --net="host" apfadler/quantlib-quil-worker
