@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd $QUIL_HOME/quantlib-quil-aws-worker
-docker build -t quantlib-quil-aws-worker-test .
-docker tag -f quantlib-quil-aws-worker-test  apfadler/quantlib-quil-aws-worker
-docker push apfadler/quantlib-quil-aws-worker
+cd $QUIL_HOME/quantlib-quil-worker
+docker build -t quantlib-quil-worker-test .
+docker tag -f quantlib-quil-worker-test  apfadler/quantlib-quil-worker
+docker push apfadler/quantlib-quil-worker
