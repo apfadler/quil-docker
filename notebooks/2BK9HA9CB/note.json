@@ -2,7 +2,7 @@
   "paragraphs": [
     {
       "text": "%md \n\u003ch2\u003eScala Quantlib Examples\u003c/h2\u003e\n\nA lot of the code shown here is due to Klaus Spanderen. See https://github.com/lballabio/QuantLib-SWIG/blob/master/Scala/examples/",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "May 29, 2016 12:06:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -29,14 +29,14 @@
         "msg": "\u003ch2\u003eScala Quantlib Examples\u003c/h2\u003e\n\u003cp\u003eA lot of the code shown here is due to Klaus Spanderen. See https://github.com/lballabio/QuantLib-SWIG/blob/master/Scala/examples/\u003c/p\u003e\n"
       },
       "dateCreated": "May 13, 2016 9:44:59 AM",
-      "dateStarted": "May 13, 2016 10:19:33 AM",
-      "dateFinished": "May 13, 2016 10:19:33 AM",
+      "dateStarted": "May 29, 2016 12:06:58 PM",
+      "dateFinished": "May 29, 2016 12:06:58 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%ignite\n\nimport org.quantlib.Month._\nimport org.quantlib.{Array \u003d\u003e QArray, _}\n\ncase class Datum(date: Date, rate: Double)",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "Jun 17, 2016 12:40:05 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -62,14 +62,104 @@
         "msg": "import org.quantlib.Month._\nimport org.quantlib.{Array\u003d\u003eQArray, _}\ndefined class Datum\n"
       },
       "dateCreated": "May 13, 2016 9:45:28 AM",
-      "dateStarted": "May 13, 2016 10:19:33 AM",
-      "dateFinished": "May 13, 2016 10:19:36 AM",
+      "dateStarted": "Jun 17, 2016 12:40:05 PM",
+      "dateFinished": "Jun 17, 2016 12:40:05 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%md \n\n\u003ch3\u003eBuilding a Yield Curve\u003c/h3\u003e",
+      "dateUpdated": "Jun 17, 2016 12:40:31 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1464475420533_-1710019195",
+      "id": "20160528-224340_1257532107",
+      "result": {
+        "code": "SUCCESS",
+        "type": "HTML",
+        "msg": "\u003ch3\u003eBuilding a Yield Curve\u003c/h3\u003e\n"
+      },
+      "dateCreated": "May 28, 2016 10:43:40 PM",
+      "dateStarted": "Jun 17, 2016 12:40:28 PM",
+      "dateFinished": "Jun 17, 2016 12:40:28 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite \n\nval dayCounterACT360 \u003d new Actual360\nval calTarget \u003d new TARGET\nval todaysDate \u003d new Date(23, Month.May, 2006)\nval settlementDate \u003d new Date(25, Month.May, 2006)\n\nval period1D \u003d new Period(1, TimeUnit.Days)\nval period1Y \u003d new Period(1, TimeUnit.Years)\nval period2Y \u003d new Period(2, TimeUnit.Years)\n\nval quote_mm_1d \u003d new SimpleQuote(0.02)\nval quote_mm_1d_handle \u003d new QuoteHandle(quote_mm_1d)\n\nval rateHelper_mm_1d \u003d new DepositRateHelper(quote_mm_1d_handle, \n                                             period1D,\n                                             1,\n                                             calTarget,\n                                             BusinessDayConvention.ModifiedFollowing,\n                                             true,\n                                             dayCounterACT360)\n\nval quote_swp_1y \u003d new SimpleQuote(0.04)\nval quote_swp_1y_handle \u003d new QuoteHandle(quote_swp_1y)\n\nval rateHelper_swp_1y \u003d new SwapRateHelper(quote_swp_1y_handle, \n                                           period1Y,\n                                           calTarget,\n                                           Frequency.Annual,\n                                           BusinessDayConvention.Unadjusted,\n                                           dayCounterACT360, new Euribor6M)\n\nval quote_swp_2y \u003d new SimpleQuote(0.05)\nval quote_swp_2y_handle \u003d new QuoteHandle(quote_swp_2y)\n\nval rateHelper_swp_2y \u003d new SwapRateHelper(quote_swp_2y_handle, \n                                           period2Y,\n                                           calTarget,\n                                           Frequency.Annual,\n                                           BusinessDayConvention.Unadjusted,\n                                           dayCounterACT360, new Euribor6M)\n\n\nvar euribor3M \u003d new Euribor3M\n\nval rateHelpers \u003d new RateHelperVector\n\nrateHelpers.add(rateHelper_mm_1d)\nrateHelpers.add(rateHelper_swp_1y)\nrateHelpers.add(rateHelper_swp_2y)\n\nval quoteHandles \u003d new QuoteHandleVector\nquoteHandles.add(quote_swp_1y_handle)\nquoteHandles.add(quote_swp_2y_handle)\n\nval curve \u003d new PiecewiseCubicZero(1, calTarget,\n                                     rateHelpers,\n                                     dayCounterACT360)\n                                     \n\nval discountingCurve \u003d new YieldTermStructureHandle(curve)\n\n\nval rateHelper_swp_1y_dep \u003d new SwapRateHelper(quote_swp_2y_handle, \n                                           period2Y,\n                                           calTarget,\n                                           Frequency.Annual,\n                                           BusinessDayConvention.Unadjusted,\n                                           dayCounterACT360, new Euribor6M,\n                                           new QuoteHandle(new SimpleQuote(0.0)),\n                                           new Period(0, TimeUnit.Days), discountingCurve)\n\nval rateHelpersFwd \u003d new RateHelperVector\n\nrateHelpersFwd.add(rateHelper_swp_1y_dep)\n\n\nval curveFwd \u003d new PiecewiseCubicZero(1, calTarget,\n                                     rateHelpersFwd,\n                                     dayCounterACT360)\n                               \nprintln(s\"\"\"%table t \\t rate\n\"\"\")\n\n(0.0 to 10.0 by 0.1).foreach (\n    t \u003d\u003e\n        print( t + \"\\t\" + curve.zeroRate(t, Compounding.Continuous, Frequency.Annual, true).rate + \"\\n\")\n)\n\n\n\n",
+      "dateUpdated": "Jun 17, 2016 12:40:34 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "lineChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "t ",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": " rate",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "yAxis": {
+              "name": " rate",
+              "index": 1.0,
+              "aggr": "sum"
+            },
+            "xAxis": {
+              "name": "t ",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1464475416286_-1316051645",
+      "id": "20160528-224336_1792533594",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "t \t rate\n\n0.0\t0.01999944446561289\n0.1\t0.020386194036357545\n0.2\t0.021496420255570116\n0.30000000000000004\t0.023184627649956525\n0.4\t0.02530498627901644\n0.5\t0.027711666202254175\n0.6\t0.03025883747917321\n0.7\t0.03280067016927593\n0.7999999999999999\t0.03519133433206676\n0.8999999999999999\t0.037285000027048126\n0.9999999999999999\t0.03893583731372322\n1.0999999999999999\t0.040193728315904065\n1.2\t0.041359747566069964\n1.3\t0.04245011483811119\n1.4000000000000001\t0.043473938731400506\n1.5000000000000002\t0.04444032784531092\n1.6000000000000003\t0.04535839077921537\n1.7000000000000004\t0.04623723613248655\n1.8000000000000005\t0.04708597250449741\n1.9000000000000006\t0.047913708494620906\n2.0000000000000004\t0.04872955270222982\n2.1000000000000005\t0.049523446502811756\n2.2000000000000006\t0.05024857691761149\n2.3000000000000007\t0.05091065251373301\n2.400000000000001\t0.051517555143511015\n2.500000000000001\t0.05207590556290688\n2.600000000000001\t0.05259130595004146\n2.700000000000001\t0.05306852853072159\n2.800000000000001\t0.05351166378421033\n2.9000000000000012\t0.05392423798573436\n3.0000000000000013\t0.054309307240490115\n3.1000000000000014\t0.054669533317519635\n3.2000000000000015\t0.055007245264734855\n3.3000000000000016\t0.05532448982120979\n3.4000000000000017\t0.05562307293318611\n3.5000000000000018\t0.055904594153049575\n3.600000000000002\t0.05617047530514281\n3.700000000000002\t0.056421984503068866\n3.800000000000002\t0.05666025637478827\n3.900000000000002\t0.05688630917616308\n4.000000000000002\t0.05710105933746916\n4.100000000000001\t0.057305333881150576\n4.200000000000001\t0.05749988106560901\n4.300000000000001\t0.057685379543813614\n4.4\t0.0578624462730089\n4.5\t0.05803164336979551\n4.6\t0.05819348407106967\n4.699999999999999\t0.058348437933991706\n4.799999999999999\t0.0584969353859587\n4.899999999999999\t0.0586393717174372\n4.999999999999998\t0.05877611059565657\n5.099999999999998\t0.05890748716492619\n5.1999999999999975\t0.0590338107892239\n5.299999999999997\t0.0591553674843028\n5.399999999999997\t0.059272422079563965\n5.4999999999999964\t0.05938522014408837\n5.599999999999996\t0.05949398970630834\n5.699999999999996\t0.05959894279266094\n5.799999999999995\t0.059700276807070345\n5.899999999999995\t0.059798175770143826\n5.999999999999995\t0.05989281143444822\n6.099999999999994\t0.05998434429008685\n6.199999999999994\t0.06007292447296297\n6.299999999999994\t0.06015869258654147\n6.399999999999993\t0.06024178044657059\n6.499999999999993\t0.060322311757060376\n6.5999999999999925\t0.060400402724808046\n6.699999999999992\t0.0604761626188916\n6.799999999999992\t0.06054969428079622\n6.8999999999999915\t0.060621094590181876\n6.999999999999991\t0.06069045489072792\n7.099999999999991\t0.060757861379991014\n7.19999999999999\t0.060823395466774566\n7.29999999999999\t0.060887134099125675\n7.39999999999999\t0.060949150065737576\n7.499999999999989\t0.061009512273239835\n7.599999999999989\t0.0610682860015973\n7.699999999999989\t0.0611255331396078\n7.799999999999988\t0.0611813124022847\n7.899999999999988\t0.061235679531729266\n7.999999999999988\t0.06128868748293774\n8.099999999999987\t0.06134038659584475\n8.199999999999987\t0.06139082475477843\n8.299999999999986\t0.061440047536388404\n8.399999999999986\t0.061488098347007684\n8.499999999999986\t0.061535018550318246\n8.599999999999985\t0.06158084758610996\n8.699999999999985\t0.061625623080849005\n8.799999999999985\t0.06166938095070759\n8.899999999999984\t0.061712155497648045\n8.999999999999984\t0.0617539794991009\n9.099999999999984\t0.061794884291730634\n9.199999999999983\t0.06183489984973798\n9.299999999999983\t0.06187405485811077\n9.399999999999983\t0.06191237678119901\n9.499999999999982\t0.06194989192695909\n9.599999999999982\t0.061986625507182494\n9.699999999999982\t0.062022601693999244\n9.799999999999981\t0.06205784367292178\n9.89999999999998\t0.06209237369267413\n9.99999999999998\t0.062126213112031446\n"
+      },
+      "dateCreated": "May 28, 2016 10:43:36 PM",
+      "dateStarted": "Jun 17, 2016 12:40:34 PM",
+      "dateFinished": "Jun 17, 2016 12:40:40 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\u003ch3\u003eHeston Monte Carlo\u003c/h3\u003e",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "May 29, 2016 12:06:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -96,14 +186,14 @@
         "msg": "\u003ch3\u003eHeston Monte Carlo\u003c/h3\u003e\n"
       },
       "dateCreated": "May 13, 2016 9:49:39 AM",
-      "dateStarted": "May 13, 2016 10:19:33 AM",
-      "dateFinished": "May 13, 2016 10:19:33 AM",
+      "dateStarted": "May 29, 2016 12:06:58 PM",
+      "dateFinished": "May 29, 2016 12:06:59 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%ignite\n\nval dayCounter     \u003d new ActualActual();\nval settlementDate \u003d new Date(27, Month.December, 2004)\nSettings.instance setEvaluationDate settlementDate\n\nval exerciseDate \u003d new Date(28, Month.March, 2005)\nval maturity \u003d dayCounter.yearFraction(settlementDate, exerciseDate)\n\nval payoff \u003d new PlainVanillaPayoff(Option.Type.Call, 1.05)\nval exercise \u003d new EuropeanExercise(exerciseDate)\nval vanillaOption \u003d new VanillaOption(payoff, exercise)\n\nval rTS \u003d new YieldTermStructureHandle(\n    new FlatForward(settlementDate, 0.0225, dayCounter))\n\nval divTS \u003d new YieldTermStructureHandle(\n    new FlatForward(settlementDate, 0.02, dayCounter))\n\nval s0 \u003d new QuoteHandle(new SimpleQuote(1.0))\n\nval v0    \u003d  0.1\nval kappa \u003d  3.16\nval theta \u003d  0.09\nval sigma \u003d  0.4\nval rho   \u003d -0.2\n\nval hestonProcess \u003d new HestonProcess(rTS, divTS, s0, v0, \n                                      kappa, theta, sigma, rho)\n\nval hestonModel \u003d new HestonModel(hestonProcess)\nval analyticEngine \u003d new AnalyticHestonEngine(hestonModel)\nvanillaOption.setPricingEngine(analyticEngine)\n\nval timeSteps \u003d 10\nval grsg \u003d new GaussianRandomSequenceGenerator(\n    new UniformRandomSequenceGenerator(\n        2*timeSteps, new UniformRandomGenerator(1234)))\n\nval grid \u003d new TimeGrid(maturity, timeSteps)\nval times \u003d new DoubleVector()\n(0L until grid.getSize).foreach(i \u003d\u003e times add(grid elementAt i))\nval gen \u003d new GaussianMultiPathGenerator(hestonProcess, times, grsg) \n\nval stat \u003d new IncrementalStatistics()\nfor (i \u003c- (0 until 50000)) {\n    stat.add(0.5*( payoff.getValue(gen.next.value at 0 back)\n                  +payoff.getValue(gen.antithetic.value at 0 back())))\n}\n\nprintf(\"Semi-Analytic: %f\\n\", vanillaOption.NPV())\nprintf(\"Monte-Carlo  : %f +/-%f\\n\", stat.mean(), stat.errorEstimate()) \n",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "Jun 17, 2016 12:40:47 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -126,17 +216,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "dayCounter: org.quantlib.ActualActual \u003d Actual/Actual (ISDA) day counter\nsettlementDate: org.quantlib.Date \u003d December 27th, 2004\nexerciseDate: org.quantlib.Date \u003d March 28th, 2005\nmaturity: Double \u003d 0.24927764054195672\npayoff: org.quantlib.PlainVanillaPayoff \u003d org.quantlib.PlainVanillaPayoff@28df1128\nexercise: org.quantlib.EuropeanExercise \u003d org.quantlib.EuropeanExercise@624c66cf\nvanillaOption: org.quantlib.VanillaOption \u003d org.quantlib.VanillaOption@2a8b3bf8\nrTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@5271747a\ndivTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@745335e4\ns0: org.quantlib.QuoteHandle \u003d org.quantlib.QuoteHandle@4c16cebf\nv0: Double \u003d 0.1\nkappa: Double \u003d 3.16\ntheta: Double \u003d 0.09\nsigma: Double \u003d 0.4\nrho: Double \u003d -0.2\nhestonProcess: org.quantlib.HestonProcess \u003d org.quantlib.HestonProcess@69218362\nhestonModel: org.quantlib.HestonModel \u003d org.quantlib.HestonModel@4e264d7e\nanalyticEngine: org.quantlib.AnalyticHestonEngine \u003d org.quantlib.AnalyticHestonEngine@2fc006a8\ntimeSteps: Int \u003d 10\ngrsg: org.quantlib.GaussianRandomSequenceGenerator \u003d org.quantlib.GaussianRandomSequenceGenerator@26a183ac\ngrid: org.quantlib.TimeGrid \u003d org.quantlib.TimeGrid@6f865dae\ntimes: org.quantlib.DoubleVector \u003d org.quantlib.DoubleVector@7d29bf6d\ngen: org.quantlib.GaussianMultiPathGenerator \u003d org.quantlib.GaussianMultiPathGenerator@3590717\nstat: org.quantlib.IncrementalStatistics \u003d org.quantlib.IncrementalStatistics@7e236dda\nwarning: there were 1 feature warning(s); re-run with -feature for details\nSemi-Analytic: 0.040477\nMonte-Carlo  : 0.040868 +/-0.000220\n"
+        "msg": "dayCounter: org.quantlib.ActualActual \u003d Actual/Actual (ISDA) day counter\nsettlementDate: org.quantlib.Date \u003d December 27th, 2004\nexerciseDate: org.quantlib.Date \u003d March 28th, 2005\nmaturity: Double \u003d 0.24927764054195672\npayoff: org.quantlib.PlainVanillaPayoff \u003d org.quantlib.PlainVanillaPayoff@1ae74e6\nexercise: org.quantlib.EuropeanExercise \u003d org.quantlib.EuropeanExercise@77a2e14b\nvanillaOption: org.quantlib.VanillaOption \u003d org.quantlib.VanillaOption@154a9217\nrTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@5d61e997\ndivTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@9930ef7\ns0: org.quantlib.QuoteHandle \u003d org.quantlib.QuoteHandle@293fc7f5\nv0: Double \u003d 0.1\nkappa: Double \u003d 3.16\ntheta: Double \u003d 0.09\nsigma: Double \u003d 0.4\nrho: Double \u003d -0.2\nhestonProcess: org.quantlib.HestonProcess \u003d org.quantlib.HestonProcess@7b6de6f7\nhestonModel: org.quantlib.HestonModel \u003d org.quantlib.HestonModel@1bd177cf\nanalyticEngine: org.quantlib.AnalyticHestonEngine \u003d org.quantlib.AnalyticHestonEngine@2ff9ffd4\ntimeSteps: Int \u003d 10\ngrsg: org.quantlib.GaussianRandomSequenceGenerator \u003d org.quantlib.GaussianRandomSequenceGenerator@64b67d39\ngrid: org.quantlib.TimeGrid \u003d org.quantlib.TimeGrid@384947e0\ntimes: org.quantlib.DoubleVector \u003d org.quantlib.DoubleVector@4acdd506\ngen: org.quantlib.GaussianMultiPathGenerator \u003d org.quantlib.GaussianMultiPathGenerator@17c5a563\nstat: org.quantlib.IncrementalStatistics \u003d org.quantlib.IncrementalStatistics@33056fe\nwarning: there was one feature warning; re-run with -feature for details\nSemi-Analytic: 0.040477\nMonte-Carlo  : 0.040868 +/-0.000220\n"
       },
       "dateCreated": "May 13, 2016 9:49:34 AM",
-      "dateStarted": "May 13, 2016 10:19:34 AM",
-      "dateFinished": "May 13, 2016 10:19:44 AM",
+      "dateStarted": "Jun 17, 2016 12:40:47 PM",
+      "dateFinished": "Jun 17, 2016 12:40:54 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\u003ch3\u003eHeston Calibration\u003c/h3\u003e",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "May 29, 2016 12:06:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -164,14 +254,14 @@
         "msg": "\u003ch3\u003eHeston Calibration\u003c/h3\u003e\n"
       },
       "dateCreated": "May 13, 2016 9:54:10 AM",
-      "dateStarted": "May 13, 2016 10:19:33 AM",
-      "dateFinished": "May 13, 2016 10:19:33 AM",
+      "dateStarted": "May 29, 2016 12:06:59 PM",
+      "dateFinished": "May 29, 2016 12:06:59 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "text": "%ignite\n\nval calendar       \u003d new TARGET();\nval dayCounter     \u003d new Actual365Fixed();\nval settlementDate \u003d new Date(5, Month.July, 2002);\nSettings.instance setEvaluationDate settlementDate\n\nval rates \u003d new DoubleVector()\nList(0.0357,0.0357,0.0349,0.0341,0.0355,\n     0.0359,0.0368,0.0386,0.0401).foreach(i \u003d\u003e rates.add(i))\n     \nval dates \u003d new DateVector()\nval maturityInDays \u003d Vector(0, 13, 41, 75, 165, 256, 345, 524, 703)     \nmaturityInDays.foreach(i \u003d\u003e dates.add(settlementDate.add(i)))\n\nval rTS \u003d new YieldTermStructureHandle(\n    new ZeroCurve(dates, rates, dayCounter))\n\nval divTS \u003d new YieldTermStructureHandle(\n    new FlatForward(settlementDate, 0.0, dayCounter))\n\nval s0 \u003d new QuoteHandle(new SimpleQuote(4468.17))\n\nval vols \u003d Vector(\n    0.6625,0.4875,0.4204,0.3667,0.3431,0.3267,0.3121,0.3121,\n    0.6007,0.4543,0.3967,0.3511,0.3279,0.3154,0.2984,0.2921,\n    0.5084,0.4221,0.3718,0.3327,0.3155,0.3027,0.2919,0.2889,\n    0.4541,0.3869,0.3492,0.3149,0.2963,0.2926,0.2819,0.2800,\n    0.4060,0.3607,0.3330,0.2999,0.2887,0.2811,0.2751,0.2775,\n    0.3726,0.3396,0.3108,0.2781,0.2788,0.2722,0.2661,0.2686,\n    0.3550,0.3277,0.3012,0.2781,0.2781,0.2661,0.2661,0.2681,\n    0.3428,0.3209,0.2958,0.2740,0.2688,0.2627,0.2580,0.2620,\n    0.3302,0.3062,0.2799,0.2631,0.2573,0.2533,0.2504,0.2544,\n    0.3343,0.2959,0.2705,0.2540,0.2504,0.2464,0.2448,0.2462,\n    0.3460,0.2845,0.2624,0.2463,0.2425,0.2385,0.2373,0.2422,\n    0.3857,0.2860,0.2578,0.2399,0.2357,0.2327,0.2312,0.2351,\n    0.3976,0.2860,0.2607,0.2356,0.2297,0.2268,0.2241,0.2320 )\n    \nval strikes \u003d Vector( \n    3400,3600,3800,4000,4200,4400,4500,4600,4800,5000,5200,5400,5600)\n    \nval calibrationHelpers \u003d new CalibrationHelperVector()    \n    \nfor (s \u003c- (0 to 12)) {\n    for (m \u003c- (1 to 8)) {\n        val vol \u003d new QuoteHandle(new SimpleQuote(vols(s*8+m-1)))\n        val maturityInWeeks \u003d ((maturityInDays(m)+3)/7.).toInt\n        val maturity \u003d new Period(maturityInWeeks, TimeUnit.Weeks)\n\n        calibrationHelpers.add(\n            new HestonModelHelper(maturity, calendar, s0.value, \n                                  strikes(s), vol, rTS, divTS, \n                                  CalibrationHelper.ImpliedVolError))\n    }\n}\n\nval helpers \u003d for (i \u003c- 0 until calibrationHelpers.size().toInt)\n    yield(calibrationHelpers.get(i))\n\nval v0   \u003d  0.1\nval kappa\u003d  1.0\nval theta\u003d  0.1\nval sigma\u003d  0.5\nval rho  \u003d -0.5\n\nval hestonProcess \u003d new HestonProcess(rTS, divTS, s0, v0, \n                                      kappa, theta, sigma, rho)\n\nval hestonModel \u003d new HestonModel(hestonProcess) \nval analyticHestonEngine \u003d new AnalyticHestonEngine(hestonModel, 64);\n\nhelpers.foreach(h \u003d\u003e h setPricingEngine analyticHestonEngine)\n\nval optimizerMethod \u003d new LevenbergMarquardt(1e-8, 1e-8, 1e-8)\nhestonModel.calibrate(calibrationHelpers, optimizerMethod, \n                      new EndCriteria(400, 40, 1.0e-8, 1.0e-8, 1.0e-8))\n                      \nval sse \u003d helpers map {h \u003d\u003e 100*h.calibrationError} map {e \u003d\u003e e*e} sum;\nprintf(\"error\u003d  %f\\n\",sse)\n\nval params \u003d hestonModel.params\nprintf(\"v0   \u003d  %f\\n\",params.get(4))\nprintf(\"kappa\u003d  %f\\n\",params.get(1))\nprintf(\"theta\u003d  %f\\n\",params.get(0))\nprintf(\"sigma\u003d  %f\\n\",params.get(2))\nprintf(\"rho  \u003d %f\\n\", params.get(3))",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "text": "%ignite\n\nval calendar       \u003d new TARGET();\nval dayCounter     \u003d new Actual365Fixed();\nval settlementDate \u003d new Date(5, Month.July, 2002);\nSettings.instance setEvaluationDate settlementDate\n\nval rates \u003d new DoubleVector()\nList(0.0357,0.0357,0.0349,0.0341,0.0355,\n     0.0359,0.0368,0.0386,0.0401).foreach(i \u003d\u003e rates.add(i))\n     \nval dates \u003d new DateVector()\nval maturityInDays \u003d Vector(0, 13, 41, 75, 165, 256, 345, 524, 703)     \nmaturityInDays.foreach(i \u003d\u003e dates.add(settlementDate.add(i)))\n\nval rTS \u003d new YieldTermStructureHandle(\n    new ZeroCurve(dates, rates, dayCounter))\n\nval divTS \u003d new YieldTermStructureHandle(\n    new FlatForward(settlementDate, 0.0, dayCounter))\n\nval s0 \u003d new QuoteHandle(new SimpleQuote(4468.17))\n\nval vols \u003d Vector(\n    0.6625,0.4875,0.4204,0.3667,0.3431,0.3267,0.3121,0.3121,\n    0.6007,0.4543,0.3967,0.3511,0.3279,0.3154,0.2984,0.2921,\n    0.5084,0.4221,0.3718,0.3327,0.3155,0.3027,0.2919,0.2889,\n    0.4541,0.3869,0.3492,0.3149,0.2963,0.2926,0.2819,0.2800,\n    0.4060,0.3607,0.3330,0.2999,0.2887,0.2811,0.2751,0.2775,\n    0.3726,0.3396,0.3108,0.2781,0.2788,0.2722,0.2661,0.2686,\n    0.3550,0.3277,0.3012,0.2781,0.2781,0.2661,0.2661,0.2681,\n    0.3428,0.3209,0.2958,0.2740,0.2688,0.2627,0.2580,0.2620,\n    0.3302,0.3062,0.2799,0.2631,0.2573,0.2533,0.2504,0.2544,\n    0.3343,0.2959,0.2705,0.2540,0.2504,0.2464,0.2448,0.2462,\n    0.3460,0.2845,0.2624,0.2463,0.2425,0.2385,0.2373,0.2422,\n    0.3857,0.2860,0.2578,0.2399,0.2357,0.2327,0.2312,0.2351,\n    0.3976,0.2860,0.2607,0.2356,0.2297,0.2268,0.2241,0.2320 )\n    \nval strikes \u003d Vector( \n    3400,3600,3800,4000,4200,4400,4500,4600,4800,5000,5200,5400,5600)\n    \nval calibrationHelpers \u003d new CalibrationHelperVector()    \n    \nfor (s \u003c- (0 to 12)) {\n    for (m \u003c- (1 to 8)) {\n        val vol \u003d new QuoteHandle(new SimpleQuote(vols(s*8+m-1)))\n        val maturityInWeeks \u003d ((maturityInDays(m)+3)/7).toInt\n        val maturity \u003d new Period(maturityInWeeks, TimeUnit.Weeks)\n\n        calibrationHelpers.add(\n            new HestonModelHelper(maturity, calendar, s0.value, \n                                  strikes(s), vol, rTS, divTS, \n                                  CalibrationHelper.ImpliedVolError))\n    }\n}\n\nval helpers \u003d for (i \u003c- 0 until calibrationHelpers.size().toInt)\n    yield(calibrationHelpers.get(i))\n\nval v0   \u003d  0.1\nval kappa\u003d  1.0\nval theta\u003d  0.1\nval sigma\u003d  0.5\nval rho  \u003d -0.5\n\nval hestonProcess \u003d new HestonProcess(rTS, divTS, s0, v0, \n                                      kappa, theta, sigma, rho)\n\nval hestonModel \u003d new HestonModel(hestonProcess) \nval analyticHestonEngine \u003d new AnalyticHestonEngine(hestonModel, 64);\n\nhelpers.foreach(h \u003d\u003e h setPricingEngine analyticHestonEngine)\n\nval optimizerMethod \u003d new LevenbergMarquardt(1e-8, 1e-8, 1e-8)\nhestonModel.calibrate(calibrationHelpers, optimizerMethod, \n                      new EndCriteria(400, 40, 1.0e-8, 1.0e-8, 1.0e-8))\n                      \nval sse \u003d helpers map {h \u003d\u003e 100*h.calibrationError} map {e \u003d\u003e e*e} sum;\nprintf(\"error\u003d  %f\\n\",sse)\n\nval params \u003d hestonModel.params\nprintf(\"v0   \u003d  %f\\n\",params.get(4))\nprintf(\"kappa\u003d  %f\\n\",params.get(1))\nprintf(\"theta\u003d  %f\\n\",params.get(0))\nprintf(\"sigma\u003d  %f\\n\",params.get(2))\nprintf(\"rho  \u003d %f\\n\", params.get(3))",
+      "dateUpdated": "Jun 14, 2016 11:46:39 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -194,17 +284,17 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "calendar: org.quantlib.TARGET \u003d TARGET calendar\ndayCounter: org.quantlib.Actual365Fixed \u003d Actual/365 (Fixed) day counter\nsettlementDate: org.quantlib.Date \u003d July 5th, 2002\nrates: org.quantlib.DoubleVector \u003d org.quantlib.DoubleVector@393fe089\ndates: org.quantlib.DateVector \u003d org.quantlib.DateVector@d6b83a9\nmaturityInDays: scala.collection.immutable.Vector[Int] \u003d Vector(0, 13, 41, 75, 165, 256, 345, 524, 703)\nrTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@19c66909\ndivTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@67950f8f\ns0: org.quantlib.QuoteHandle \u003d org.quantlib.QuoteHandle@e689d81\nvols: scala.collection.immutable.Vector[Double] \u003d Vector(0.6625, 0.4875, 0.4204, 0.3667, 0.3431, 0.3267, 0.3121, 0.3121, 0.6007, 0.4543, 0.3967, 0.3511, 0.3279, 0.3154, 0.2984, 0.2921, 0.5084, 0.4221, 0.3718, 0.3327, 0.3155, 0.3027, 0.2919, 0.2889, 0.4541, 0.3869, 0.3492, 0.3149, 0.2963, 0.2926, 0.2819, 0.28, 0.406, 0.3607, 0.333, 0.2999, 0.2887, 0.2811, 0.2751, 0.2775, 0.3726, 0.3396, 0.3108, 0.2781, 0.2788, 0.2722, 0.2661, 0.2686, 0.355, 0.3277, 0.3012, 0.2781, 0.2781, 0.2661, 0.2661, 0.2681, 0.3428, 0.3209, 0.2958, 0.274, 0.2688, 0.2627, 0.258, 0.262, 0.3302, 0.3062, 0.2799, 0.2631, 0.2573, 0.2533, 0.2504, 0.2544, 0.3343, 0.2959, 0.2705, 0.254, 0.2504, 0.2464, 0.2448, 0.2462, 0.346, 0.2845, 0.2624, 0.2463, 0.2425, 0.2385, 0.2373, 0.2422, 0.3857, 0.286, 0.2578, 0.2399, 0.2357, 0.2327,...strikes: scala.collection.immutable.Vector[Int] \u003d Vector(3400, 3600, 3800, 4000, 4200, 4400, 4500, 4600, 4800, 5000, 5200, 5400, 5600)\ncalibrationHelpers: org.quantlib.CalibrationHelperVector \u003d org.quantlib.CalibrationHelperVector@6008072d\nwarning: there were 1 deprecation warning(s); re-run with -deprecation for details\nhelpers: scala.collection.immutable.IndexedSeq[org.quantlib.CalibrationHelper] \u003d Vector(org.quantlib.CalibrationHelper@8ac3f5d, org.quantlib.CalibrationHelper@6473f71d, org.quantlib.CalibrationHelper@7964c470, org.quantlib.CalibrationHelper@469cd353, org.quantlib.CalibrationHelper@61f6125c, org.quantlib.CalibrationHelper@622f8842, org.quantlib.CalibrationHelper@1e9ad76a, org.quantlib.CalibrationHelper@47b47fd8, org.quantlib.CalibrationHelper@1b3562af, org.quantlib.CalibrationHelper@4de1dd1d, org.quantlib.CalibrationHelper@277bc2dd, org.quantlib.CalibrationHelper@2e364f6b, org.quantlib.CalibrationHelper@6f981180, org.quantlib.CalibrationHelper@68a523bc, org.quantlib.CalibrationHelper@31cd4150, org.quantlib.CalibrationHelper@1a7b04bb, org.quantlib.CalibrationHelper@2739e92, org.quantlib.C...v0: Double \u003d 0.1\nkappa: Double \u003d 1.0\ntheta: Double \u003d 0.1\nsigma: Double \u003d 0.5\nrho: Double \u003d -0.5\nhestonProcess: org.quantlib.HestonProcess \u003d org.quantlib.HestonProcess@2a6ca8dc\nhestonModel: org.quantlib.HestonModel \u003d org.quantlib.HestonModel@54314736\nanalyticHestonEngine: org.quantlib.AnalyticHestonEngine \u003d org.quantlib.AnalyticHestonEngine@9f0bd05\noptimizerMethod: org.quantlib.LevenbergMarquardt \u003d org.quantlib.LevenbergMarquardt@2b34feb9\nwarning: there were 1 feature warning(s); re-run with -feature for details\nsse: Double \u003d 177.2346899128428\nerror\u003d  177.234690\nparams: org.quantlib.Array \u003d [ 0.0745911; 15.6628; 3.3619; -0.511493; 0.195662 ]\nv0   \u003d  0.195662\nkappa\u003d  15.662779\ntheta\u003d  0.074591\nsigma\u003d  3.361902\nrho  \u003d -0.511493\n"
+        "msg": "calendar: org.quantlib.TARGET \u003d TARGET calendar\ndayCounter: org.quantlib.Actual365Fixed \u003d Actual/365 (Fixed) day counter\nsettlementDate: org.quantlib.Date \u003d July 5th, 2002\nrates: org.quantlib.DoubleVector \u003d org.quantlib.DoubleVector@680282d5\ndates: org.quantlib.DateVector \u003d org.quantlib.DateVector@4d0243e7\nmaturityInDays: scala.collection.immutable.Vector[Int] \u003d Vector(0, 13, 41, 75, 165, 256, 345, 524, 703)\nrTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@4aa65f3f\ndivTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@79fd8ba8\ns0: org.quantlib.QuoteHandle \u003d org.quantlib.QuoteHandle@70a6ba85\nvols: scala.collection.immutable.Vector[Double] \u003d Vector(0.6625, 0.4875, 0.4204, 0.3667, 0.3431, 0.3267, 0.3121, 0.3121, 0.6007, 0.4543, 0.3967, 0.3511, 0.3279, 0.3154, 0.2984, 0.2921, 0.5084, 0.4221, 0.3718, 0.3327, 0.3155, 0.3027, 0.2919, 0.2889, 0.4541, 0.3869, 0.3492, 0.3149, 0.2963, 0.2926, 0.2819, 0.28, 0.406, 0.3607, 0.333, 0.2999, 0.2887, 0.2811, 0.2751, 0.2775, 0.3726, 0.3396, 0.3108, 0.2781, 0.2788, 0.2722, 0.2661, 0.2686, 0.355, 0.3277, 0.3012, 0.2781, 0.2781, 0.2661, 0.2661, 0.2681, 0.3428, 0.3209, 0.2958, 0.274, 0.2688, 0.2627, 0.258, 0.262, 0.3302, 0.3062, 0.2799, 0.2631, 0.2573, 0.2533, 0.2504, 0.2544, 0.3343, 0.2959, 0.2705, 0.254, 0.2504, 0.2464, 0.2448, 0.2462, 0.346, 0.2845, 0.2624, 0.2463, 0.2425, 0.2385, 0.2373, 0.2422, 0.3857, 0.286, 0.2578, 0.2399, 0.2357, 0.2327,...strikes: scala.collection.immutable.Vector[Int] \u003d Vector(3400, 3600, 3800, 4000, 4200, 4400, 4500, 4600, 4800, 5000, 5200, 5400, 5600)\ncalibrationHelpers: org.quantlib.CalibrationHelperVector \u003d org.quantlib.CalibrationHelperVector@4ab6077b\nhelpers: scala.collection.immutable.IndexedSeq[org.quantlib.CalibrationHelper] \u003d Vector(org.quantlib.CalibrationHelper@55270d7e, org.quantlib.CalibrationHelper@7e0d2218, org.quantlib.CalibrationHelper@62aea3d, org.quantlib.CalibrationHelper@464a8025, org.quantlib.CalibrationHelper@2beb296f, org.quantlib.CalibrationHelper@3c61d3e8, org.quantlib.CalibrationHelper@6d4bbd5b, org.quantlib.CalibrationHelper@7f92437f, org.quantlib.CalibrationHelper@d40bdb3, org.quantlib.CalibrationHelper@3f0cd160, org.quantlib.CalibrationHelper@f1d02bf, org.quantlib.CalibrationHelper@62793198, org.quantlib.CalibrationHelper@6adca541, org.quantlib.CalibrationHelper@3382eeab, org.quantlib.CalibrationHelper@546d1a9e, org.quantlib.CalibrationHelper@7fb3047a, org.quantlib.CalibrationHelper@704a4060, org.quantlib.Ca...v0: Double \u003d 0.1\nkappa: Double \u003d 1.0\ntheta: Double \u003d 0.1\nsigma: Double \u003d 0.5\nrho: Double \u003d -0.5\nhestonProcess: org.quantlib.HestonProcess \u003d org.quantlib.HestonProcess@55325577\nhestonModel: org.quantlib.HestonModel \u003d org.quantlib.HestonModel@73c2b8df\nanalyticHestonEngine: org.quantlib.AnalyticHestonEngine \u003d org.quantlib.AnalyticHestonEngine@566e1223\noptimizerMethod: org.quantlib.LevenbergMarquardt \u003d org.quantlib.LevenbergMarquardt@29412131\nwarning: there was one feature warning; re-run with -feature for details\nsse: Double \u003d 177.2346899127625\nerror\u003d  177.234690\nparams: org.quantlib.Array \u003d [ 0.0745911; 15.6628; 3.3619; -0.511493; 0.195662 ]\nv0   \u003d  0.195662\nkappa\u003d  15.662778\ntheta\u003d  0.074591\nsigma\u003d  3.361902\nrho  \u003d -0.511493\n"
       },
       "dateCreated": "May 13, 2016 9:54:05 AM",
-      "dateStarted": "May 13, 2016 10:19:36 AM",
-      "dateFinished": "May 13, 2016 10:19:48 AM",
+      "dateStarted": "Jun 14, 2016 11:46:39 AM",
+      "dateFinished": "Jun 14, 2016 11:46:42 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%md\n\u003ch3\u003eCPI Bond\u003c/h3\u003e",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "May 29, 2016 12:06:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -231,14 +321,14 @@
         "msg": "\u003ch3\u003eCPI Bond\u003c/h3\u003e\n"
       },
       "dateCreated": "May 13, 2016 9:48:34 AM",
-      "dateStarted": "May 13, 2016 10:19:33 AM",
-      "dateFinished": "May 13, 2016 10:19:33 AM",
+      "dateStarted": "May 29, 2016 12:06:59 PM",
+      "dateFinished": "May 29, 2016 12:06:59 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
       "text": "%ignite\n\nval startTime \u003d System.currentTimeMillis\n\nval calendar \u003d new UnitedKingdom()\nval dayCounter \u003d new ActualActual();\nval convention \u003d BusinessDayConvention.ModifiedFollowing\n\nval today \u003d new Date(25, November, 2009)\nval evaluationDate \u003d calendar.adjust(today)\nSettings.instance().setEvaluationDate(evaluationDate)        \n\nval yTS \u003d new YieldTermStructureHandle(\n            new FlatForward(evaluationDate, 0.05, dayCounter))\n\nval from \u003d new Date(20, July, 2007);\nval to   \u003d new Date(20, November, 2009);\nval tenor \u003d new Period(1, TimeUnit.Months)\nval rpiSchedule \u003d new Schedule(from, to, tenor, calendar, \n                               convention, convention,\n                               DateGeneration.Rule.Backward, false)\n\nval cpiTS \u003d new RelinkableZeroInflationTermStructureHandle\nval inflationIndex \u003d new UKRPI(false, cpiTS)\nval fixData \u003d Array(206.1, 207.3, 208.0, 208.9, 209.7, 210.9,\n                    209.8, 211.4, 212.1, 214.0, 215.1, 216.8,\n                    216.5, 217.2, 218.4, 217.7, 216,\n                    212.9, 210.1, 211.4, 211.3, 211.5,\n                    212.8, 213.4, 213.4, 213.4, 214.4)\n\nfor (i \u003c- 0 until fixData.size) {\n  inflationIndex.addFixing(rpiSchedule.date(i), fixData(i)) \n}\n\nval observationLag \u003d new Period(2, TimeUnit.Months)\nval zciisData \u003d Array(\n  Datum(new Date(25, November, 2010), 3.0495 ),\n  Datum(new Date(25, November, 2011), 2.93 ),\n  Datum(new Date(26, November, 2012), 2.9795 ),\n  Datum(new Date(25, November, 2013), 3.029 ),\n  Datum(new Date(25, November, 2014), 3.1425 ),\n  Datum(new Date(25, November, 2015), 3.211 ),\n  Datum(new Date(25, November, 2016), 3.2675 ),\n  Datum(new Date(25, November, 2017), 3.3625 ),\n  Datum(new Date(25, November, 2018), 3.405 ),\n  Datum(new Date(25, November, 2019), 3.48 ),\n  Datum(new Date(25, November, 2021), 3.576 ),\n  Datum(new Date(25, November, 2024), 3.649 ),\n  Datum(new Date(26, November, 2029), 3.751 ),\n  Datum(new Date(27, November, 2034), 3.77225),\n  Datum(new Date(25, November, 2039), 3.77 ),\n  Datum(new Date(25, November, 2049), 3.734 ),\n  Datum(new Date(25, November, 2059), 3.714 )\n)\n\nval zeroSwapHelpers \u003d new ZeroHelperVector\nzciisData map { datum \u003d\u003e zeroSwapHelpers add \n  new ZeroCouponInflationSwapHelper(\n    datum.rate/100d, observationLag,\n    datum.date, calendar, convention, dayCounter, inflationIndex) }\n\ncpiTS linkTo new PiecewiseZeroInflation(          \n  evaluationDate, calendar, dayCounter, observationLag, \n  inflationIndex.frequency, inflationIndex.interpolated, \n  zciisData(0).rate/100d,\n  yTS, zeroSwapHelpers, 1.0e-12, new Linear)\n  \nval notional \u003d 1000000d;\n\nval fixedRates \u003d new DoubleVector()\nfixedRates add 0.1    \n\nval fixedDayCounter \u003d new Actual365Fixed\nval fixedPaymentConvention \u003d BusinessDayConvention.ModifiedFollowing\nval fixedPaymentCalendar \u003d new UnitedKingdom\nval contractObservationLag \u003d new Period(3, TimeUnit.Months)\nval observationInterpolation \u003d CPI.InterpolationType.Flat\nval settlementDays \u003d 3\nval growthOnly \u003d true\n\nval baseCPI \u003d 206.1\nval startDate \u003d new Date(2, October, 2007)\nval endDate \u003d new Date(2, October, 2052)\n\nval fixedSchedule \u003d new Schedule(startDate, endDate, \n  new Period(6, TimeUnit.Months), fixedPaymentCalendar,\n  BusinessDayConvention.Unadjusted,\n  BusinessDayConvention.Unadjusted,\n  DateGeneration.Rule.Backward, false)\n  \nval bond \u003d new CPIBond(settlementDays, notional, growthOnly,\n                       baseCPI, contractObservationLag,\n                       inflationIndex, observationInterpolation,\n                       fixedSchedule, fixedRates, fixedDayCounter, \n                       fixedPaymentConvention, new Date)\n                       \nbond setPricingEngine new DiscountingBondEngine(yTS)\nprintln(\"clean price: \" + bond.cleanPrice + \" \\t exec time: \" + \n  (System.currentTimeMillis - startTime)/1000d)\n  \ncpiTS linkTo new ZeroInflationTermStructure  // break cylic reference between\n                                             // cpiTS, zeroSwapHelpers and inflationIndex",
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "Jun 14, 2016 11:46:45 AM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -261,16 +351,16 @@
       "result": {
         "code": "SUCCESS",
         "type": "TEXT",
-        "msg": "startTime: Long \u003d 1463134788580\ncalendar: org.quantlib.UnitedKingdom \u003d UK settlement calendar\ndayCounter: org.quantlib.ActualActual \u003d Actual/Actual (ISDA) day counter\nconvention: org.quantlib.BusinessDayConvention \u003d ModifiedFollowing\ntoday: org.quantlib.Date \u003d November 25th, 2009\nevaluationDate: org.quantlib.Date \u003d November 25th, 2009\nyTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@74d9bcd3\nfrom: org.quantlib.Date \u003d July 20th, 2007\nto: org.quantlib.Date \u003d November 20th, 2009\ntenor: org.quantlib.Period \u003d 1M\nrpiSchedule: org.quantlib.Schedule \u003d org.quantlib.Schedule@18b076d\ncpiTS: org.quantlib.RelinkableZeroInflationTermStructureHandle \u003d org.quantlib.RelinkableZeroInflationTermStructureHandle@139f89f2\ninflationIndex: org.quantlib.UKRPI \u003d UK RPI index\nfixData: Array[Double] \u003d Array(206.1, 207.3, 208.0, 208.9, 209.7, 210.9, 209.8, 211.4, 212.1, 214.0, 215.1, 216.8, 216.5, 217.2, 218.4, 217.7, 216.0, 212.9, 210.1, 211.4, 211.3, 211.5, 212.8, 213.4, 213.4, 213.4, 214.4)\nobservationLag: org.quantlib.Period \u003d 2M\nzciisData: Array[Datum] \u003d Array(Datum(November 25th, 2010,3.0495), Datum(November 25th, 2011,2.93), Datum(November 26th, 2012,2.9795), Datum(November 25th, 2013,3.029), Datum(November 25th, 2014,3.1425), Datum(November 25th, 2015,3.211), Datum(November 25th, 2016,3.2675), Datum(November 25th, 2017,3.3625), Datum(November 25th, 2018,3.405), Datum(November 25th, 2019,3.48), Datum(November 25th, 2021,3.576), Datum(November 25th, 2024,3.649), Datum(November 26th, 2029,3.751), Datum(November 27th, 2034,3.77225), Datum(November 25th, 2039,3.77), Datum(November 25th, 2049,3.734), Datum(November 25th, 2059,3.714))\nzeroSwapHelpers: org.quantlib.ZeroHelperVector \u003d org.quantlib.ZeroHelperVector@6ec4cfe\nres129: Array[Unit] \u003d Array((), (), (), (), (), (), (), (), (), (), (), (), (), (), (), (), ())\nnotional: Double \u003d 1000000.0\nfixedRates: org.quantlib.DoubleVector \u003d org.quantlib.DoubleVector@637ded48\nfixedDayCounter: org.quantlib.Actual365Fixed \u003d Actual/365 (Fixed) day counter\nfixedPaymentConvention: org.quantlib.BusinessDayConvention \u003d ModifiedFollowing\nfixedPaymentCalendar: org.quantlib.UnitedKingdom \u003d UK settlement calendar\ncontractObservationLag: org.quantlib.Period \u003d 3M\nobservationInterpolation: org.quantlib.CPI.InterpolationType \u003d Flat\nsettlementDays: Int \u003d 3\ngrowthOnly: Boolean \u003d true\nbaseCPI: Double \u003d 206.1\nstartDate: org.quantlib.Date \u003d October 2nd, 2007\nendDate: org.quantlib.Date \u003d October 2nd, 2052\nfixedSchedule: org.quantlib.Schedule \u003d org.quantlib.Schedule@277c8e1b\nbond: org.quantlib.CPIBond \u003d org.quantlib.CPIBond@44fb1536\nclean price: 383.0181640621462 \t exec time: 3.123\n"
+        "msg": "startTime: Long \u003d 1465904805167\ncalendar: org.quantlib.UnitedKingdom \u003d UK settlement calendar\ndayCounter: org.quantlib.ActualActual \u003d Actual/Actual (ISDA) day counter\nconvention: org.quantlib.BusinessDayConvention \u003d ModifiedFollowing\ntoday: org.quantlib.Date \u003d November 25th, 2009\nevaluationDate: org.quantlib.Date \u003d November 25th, 2009\nyTS: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@3c6f0ab1\nfrom: org.quantlib.Date \u003d July 20th, 2007\nto: org.quantlib.Date \u003d November 20th, 2009\ntenor: org.quantlib.Period \u003d 1M\nrpiSchedule: org.quantlib.Schedule \u003d org.quantlib.Schedule@2f41768a\ncpiTS: org.quantlib.RelinkableZeroInflationTermStructureHandle \u003d org.quantlib.RelinkableZeroInflationTermStructureHandle@64de16c8\ninflationIndex: org.quantlib.UKRPI \u003d UK RPI index\nfixData: Array[Double] \u003d Array(206.1, 207.3, 208.0, 208.9, 209.7, 210.9, 209.8, 211.4, 212.1, 214.0, 215.1, 216.8, 216.5, 217.2, 218.4, 217.7, 216.0, 212.9, 210.1, 211.4, 211.3, 211.5, 212.8, 213.4, 213.4, 213.4, 214.4)\nobservationLag: org.quantlib.Period \u003d 2M\nzciisData: Array[Datum] \u003d Array(Datum(November 25th, 2010,3.0495), Datum(November 25th, 2011,2.93), Datum(November 26th, 2012,2.9795), Datum(November 25th, 2013,3.029), Datum(November 25th, 2014,3.1425), Datum(November 25th, 2015,3.211), Datum(November 25th, 2016,3.2675), Datum(November 25th, 2017,3.3625), Datum(November 25th, 2018,3.405), Datum(November 25th, 2019,3.48), Datum(November 25th, 2021,3.576), Datum(November 25th, 2024,3.649), Datum(November 26th, 2029,3.751), Datum(November 27th, 2034,3.77225), Datum(November 25th, 2039,3.77), Datum(November 25th, 2049,3.734), Datum(November 25th, 2059,3.714))\nzeroSwapHelpers: org.quantlib.ZeroHelperVector \u003d org.quantlib.ZeroHelperVector@eb8b5cd\nres196: Array[Unit] \u003d Array((), (), (), (), (), (), (), (), (), (), (), (), (), (), (), (), ())\nnotional: Double \u003d 1000000.0\nfixedRates: org.quantlib.DoubleVector \u003d org.quantlib.DoubleVector@b701b10\nfixedDayCounter: org.quantlib.Actual365Fixed \u003d Actual/365 (Fixed) day counter\nfixedPaymentConvention: org.quantlib.BusinessDayConvention \u003d ModifiedFollowing\nfixedPaymentCalendar: org.quantlib.UnitedKingdom \u003d UK settlement calendar\ncontractObservationLag: org.quantlib.Period \u003d 3M\nobservationInterpolation: org.quantlib.CPI.InterpolationType \u003d Flat\nsettlementDays: Int \u003d 3\ngrowthOnly: Boolean \u003d true\nbaseCPI: Double \u003d 206.1\nstartDate: org.quantlib.Date \u003d October 2nd, 2007\nendDate: org.quantlib.Date \u003d October 2nd, 2052\nfixedSchedule: org.quantlib.Schedule \u003d org.quantlib.Schedule@5fcb6917\nbond: org.quantlib.CPIBond \u003d org.quantlib.CPIBond@6fc3d62d\nclean price: 383.0181640621462 \t exec time: 2.172\n"
       },
       "dateCreated": "May 13, 2016 9:46:16 AM",
-      "dateStarted": "May 13, 2016 10:19:44 AM",
-      "dateFinished": "May 13, 2016 10:19:51 AM",
+      "dateStarted": "Jun 14, 2016 11:46:45 AM",
+      "dateFinished": "Jun 14, 2016 11:46:47 AM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     },
     {
-      "dateUpdated": "May 13, 2016 10:19:33 AM",
+      "dateUpdated": "May 29, 2016 12:06:58 PM",
       "config": {
         "colWidth": 12.0,
         "graph": {
@@ -295,29 +385,22 @@
         "type": "TEXT"
       },
       "dateCreated": "May 13, 2016 9:47:06 AM",
-      "dateStarted": "May 13, 2016 10:19:33 AM",
-      "dateFinished": "May 13, 2016 10:19:33 AM",
+      "dateStarted": "May 29, 2016 12:06:58 PM",
+      "dateFinished": "May 29, 2016 12:07:19 PM",
       "status": "FINISHED",
       "progressUpdateIntervalMs": 500
     }
   ],
-  "name": "Quantlib Examples",
+  "name": "Zeppelin+Scala+QuantLib",
   "id": "2BK9HA9CB",
   "angularObjects": {
-    "2BMST158R": [],
-    "2BNJE44FY": [],
-    "2BNKPCHN2": [],
-    "2BM68G2YM": [],
-    "2BJWHB4QB": [],
-    "2BHZC3YPG": [],
-    "2BJSM69HU": [],
-    "2BN27XM17": [],
-    "2BJW2G123": [],
-    "2BHU7BGDU": [],
-    "2BM3B5ZJW": [],
-    "2BMQ4Y2QW": [],
-    "2BMDUX563": []
+    "2BMAUQEGZ": [],
+    "2BKDJU4A8": [],
+    "2BK4YDBHP": [],
+    "2BMZYRM31": []
   },
-  "config": {},
+  "config": {
+    "looknfeel": "default"
+  },
   "info": {}
 }

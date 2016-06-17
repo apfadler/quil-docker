@@ -1,0 +1,363 @@
+{
+  "paragraphs": [
+    {
+      "text": "%ignite\n\nimport org.quil.objects._",
+      "dateUpdated": "Jun 17, 2016 12:42:36 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465666981237_-949279986",
+      "id": "20160611-174301_663982064",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.quil.objects._\n"
+      },
+      "dateCreated": "Jun 11, 2016 5:43:01 PM",
+      "dateStarted": "Jun 17, 2016 12:42:36 PM",
+      "dateFinished": "Jun 17, 2016 12:42:36 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nimplicit val ctx \u003d new Context\n",
+      "dateUpdated": "Jun 17, 2016 12:42:38 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465666997823_1062602661",
+      "id": "20160611-174317_271711742",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "ctx: org.quil.objects.Context \u003d org.quil.objects.Context@c6895be\n"
+      },
+      "dateCreated": "Jun 11, 2016 5:43:17 PM",
+      "dateStarted": "Jun 17, 2016 12:42:38 PM",
+      "dateFinished": "Jun 17, 2016 12:42:38 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nimport org.quil.objects.Schema._",
+      "dateUpdated": "Jun 17, 2016 12:42:44 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465667016233_-163576760",
+      "id": "20160611-174336_1887289005",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.quil.objects.Schema._\n"
+      },
+      "dateCreated": "Jun 11, 2016 5:43:36 PM",
+      "dateStarted": "Jun 17, 2016 12:42:44 PM",
+      "dateFinished": "Jun 17, 2016 12:42:44 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\n\nIndex(ID \u003d \"Euribor6M\", Fixings \u003d List(\n    Fixing(\"2016-05-30\",0.001)\n  )\n)\nIndex(ID \u003d \"EONIA\", Fixings \u003d List(\n    Fixing(\"2016-05-30\",0.001)\n  )\n)\n",
+      "dateUpdated": "Jun 17, 2016 12:42:49 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465667026697_1879455224",
+      "id": "20160611-174346_821607455",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res234: org.quil.objects.Schema.Index \u003d Index(Euribor6M,List(Fixing(2016-05-30,0.001)),org.quil.objects.Context@c6895be)\nres235: org.quil.objects.Schema.Index \u003d Index(EONIA,List(Fixing(2016-05-30,0.001)),org.quil.objects.Context@c6895be)\n"
+      },
+      "dateCreated": "Jun 11, 2016 5:43:46 PM",
+      "dateStarted": "Jun 17, 2016 12:42:49 PM",
+      "dateFinished": "Jun 17, 2016 12:42:50 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nDepositInstrument(ID \u003d \"EUR_OIS_MM_1D\",\n                      Quote \u003d 0.001,\n                      PeriodName \u003d  \"1D\",\n                      CalendarName \u003d \"TARGET\",\n                      BDConventionName \u003d  \"ModifiedFollowing\",\n                      DayCountName \u003d \"Actual360\")\n\n\nVanillaOISSwapInstrument(ID \u003d \"EUR_OIS_SWP_1M\",\n                         Quote \u003d 0.002,\n                         PeriodName \u003d \"1M\",\n                         CalendarName \u003d \"TARGET\",\n                         FrequencyName \u003d \"Annual\",\n                         BDConventionName \u003d  \"ModifiedFollowing\",\n                         DayCountName \u003d \"Actual360\",\n                         Index \u003d SQReference(\"EONIA\", \"\"))\n\nVanillaOISSwapInstrument(ID \u003d \"EUR_OIS_SWP_1Y\",\n                         Quote \u003d 0.01,\n                         PeriodName \u003d \"1Y\",\n                         CalendarName \u003d \"TARGET\",\n                         FrequencyName \u003d \"Annual\",\n                         BDConventionName \u003d  \"ModifiedFollowing\",\n                         DayCountName \u003d \"Actual360\",\n                         Index \u003d SQReference(\"EONIA\", \"\"))\n\nVanillaOISSwapInstrument(ID \u003d \"EUR_OIS_SWP_2Y\",\n                         Quote \u003d 0.02,\n                         PeriodName \u003d \"2Y\",\n                         CalendarName \u003d \"TARGET\",\n                         FrequencyName \u003d \"Annual\",\n                         BDConventionName \u003d  \"ModifiedFollowing\",\n                         DayCountName \u003d \"Actual360\",\n                         Index \u003d SQReference(\"EONIA\", \"\"))\n\nVanillaOISSwapInstrument(ID \u003d \"EUR_OIS_SWP_5Y\",\n                         Quote \u003d 0.03,\n                         PeriodName \u003d \"5Y\",\n                         CalendarName \u003d \"TARGET\",\n                         FrequencyName \u003d \"Annual\",\n                         BDConventionName \u003d  \"ModifiedFollowing\",\n                         DayCountName \u003d \"Actual360\",\n                         Index \u003d SQReference(\"EONIA\", \"\"))\n\nCollateralizedVanillaSwapInstrument(ID \u003d \"EUR_6M_SWP_1Y\",\n                                    Quote \u003d 0.01,\n                                    PeriodName \u003d \"1Y\",\n                                    CalendarName \u003d \"TARGET\",\n                                    FrequencyName \u003d \"Annual\",\n                                    BDConventionName \u003d  \"ModifiedFollowing\",\n                                    DayCountName \u003d \"Actual360\",\n                                    Index \u003d SQReference(\"Euribor6M\", \"\"),\n                                    DiscountingCurve \u003d SQReference(\"EUR_OIS\", \"\"))\n\nCollateralizedVanillaSwapInstrument(ID \u003d \"EUR_6M_SWP_2Y\",\n                                    Quote \u003d 0.02,\n                                    PeriodName \u003d \"2Y\",\n                                    CalendarName \u003d \"TARGET\",\n                                    FrequencyName \u003d \"Annual\",\n                                    BDConventionName \u003d  \"ModifiedFollowing\",\n                                    DayCountName \u003d \"Actual360\",\n                                    Index \u003d SQReference(\"Euribor6M\", \"\"),\n                                    DiscountingCurve \u003d SQReference(\"EUR_OIS\", \"\"))\n\nCollateralizedVanillaSwapInstrument(ID \u003d \"EUR_6M_SWP_5Y\",\n                                    Quote \u003d 0.03,\n                                    PeriodName \u003d \"5Y\",\n                                    CalendarName \u003d \"TARGET\",\n                                    FrequencyName \u003d \"Annual\",\n                                    BDConventionName \u003d  \"ModifiedFollowing\",\n                                    DayCountName \u003d \"Actual360\",\n                                    Index \u003d SQReference(\"Euribor6M\", \"\"),\n                                    DiscountingCurve \u003d SQReference(\"EUR_OIS\", \"\"))\n\n",
+      "dateUpdated": "Jun 17, 2016 12:42:52 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465667130733_572011707",
+      "id": "20160611-174530_384261377",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res238: org.quil.objects.Schema.DepositInstrument \u003d DepositInstrument(EUR_OIS_MM_1D,0.001,1D,TARGET,ModifiedFollowing,Actual360,org.quil.objects.Context@c6895be)\nres241: org.quil.objects.Schema.VanillaOISSwapInstrument \u003d VanillaOISSwapInstrument(EUR_OIS_SWP_1M,0.002,1M,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(EONIA,),org.quil.objects.Context@c6895be)\nres243: org.quil.objects.Schema.VanillaOISSwapInstrument \u003d VanillaOISSwapInstrument(EUR_OIS_SWP_1Y,0.01,1Y,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(EONIA,),org.quil.objects.Context@c6895be)\nres245: org.quil.objects.Schema.VanillaOISSwapInstrument \u003d VanillaOISSwapInstrument(EUR_OIS_SWP_2Y,0.02,2Y,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(EONIA,),org.quil.objects.Context@c6895be)\nres247: org.quil.objects.Schema.VanillaOISSwapInstrument \u003d VanillaOISSwapInstrument(EUR_OIS_SWP_5Y,0.03,5Y,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(EONIA,),org.quil.objects.Context@c6895be)\nres249: org.quil.objects.Schema.CollateralizedVanillaSwapInstrument \u003d CollateralizedVanillaSwapInstrument(EUR_6M_SWP_1Y,0.01,1Y,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(Euribor6M,),SQReference(EUR_OIS,),org.quil.objects.Context@c6895be)\nres251: org.quil.objects.Schema.CollateralizedVanillaSwapInstrument \u003d CollateralizedVanillaSwapInstrument(EUR_6M_SWP_2Y,0.02,2Y,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(Euribor6M,),SQReference(EUR_OIS,),org.quil.objects.Context@c6895be)\nres253: org.quil.objects.Schema.CollateralizedVanillaSwapInstrument \u003d CollateralizedVanillaSwapInstrument(EUR_6M_SWP_5Y,0.03,5Y,TARGET,Annual,ModifiedFollowing,Actual360,SQReference(Euribor6M,),SQReference(EUR_OIS,),org.quil.objects.Context@c6895be)\n"
+      },
+      "dateCreated": "Jun 11, 2016 5:45:30 PM",
+      "dateStarted": "Jun 17, 2016 12:42:52 PM",
+      "dateFinished": "Jun 17, 2016 12:42:54 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nYieldCurve(ID \u003d \"EUR_OIS\",\n           CalendarName \u003d \"TARGET\",\n           DayCountName \u003d \"Actual365Fixed\",\n           Instruments \u003d List(SQReference(\"EUR_OIS_MM_1D\", \"DepositInstrument\"),\n                              SQReference(\"EUR_OIS_SWP_1M\", \"VanillaOISSwapInstrument\"),\n                              SQReference(\"EUR_OIS_SWP_1Y\", \"VanillaOISSwapInstrument\"),\n                              SQReference(\"EUR_OIS_SWP_2Y\", \"VanillaOISSwapInstrument\"),\n                              SQReference(\"EUR_OIS_SWP_5Y\", \"VanillaOISSwapInstrument\")))\n\nYieldCurve(ID \u003d \"EUR_FWD_6M\",\n           CalendarName \u003d \"TARGET\",\n           DayCountName \u003d \"Actual365Fixed\",\n           Instruments \u003d List(SQReference(\"EUR_OIS_MM_1D\", \"DepositInstrument\"),\n                              SQReference(\"EUR_6M_SWP_1Y\", \"VanillaSwapInstrument\"),\n                              SQReference(\"EUR_6M_SWP_2Y\", \"VanillaSwapInstrument\"),\n                              SQReference(\"EUR_6M_SWP_5Y\", \"VanillaSwapInstrument\")))",
+      "dateUpdated": "Jun 17, 2016 12:42:58 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465907162767_-1088422332",
+      "id": "20160614-122602_1834262081",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "res256: org.quil.objects.Schema.YieldCurve \u003d YieldCurve(EUR_OIS,TARGET,Actual365Fixed,List(SQReference(EUR_OIS_MM_1D,DepositInstrument), SQReference(EUR_OIS_SWP_1M,VanillaOISSwapInstrument), SQReference(EUR_OIS_SWP_1Y,VanillaOISSwapInstrument), SQReference(EUR_OIS_SWP_2Y,VanillaOISSwapInstrument), SQReference(EUR_OIS_SWP_5Y,VanillaOISSwapInstrument)),org.quil.objects.Context@c6895be)\nres258: org.quil.objects.Schema.YieldCurve \u003d YieldCurve(EUR_FWD_6M,TARGET,Actual365Fixed,List(SQReference(EUR_OIS_MM_1D,DepositInstrument), SQReference(EUR_6M_SWP_1Y,VanillaSwapInstrument), SQReference(EUR_6M_SWP_2Y,VanillaSwapInstrument), SQReference(EUR_6M_SWP_5Y,VanillaSwapInstrument)),org.quil.objects.Context@c6895be)\n"
+      },
+      "dateCreated": "Jun 14, 2016 12:26:02 PM",
+      "dateStarted": "Jun 17, 2016 12:42:58 PM",
+      "dateFinished": "Jun 17, 2016 12:42:59 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nimport org.quantlib.{Array\u003d\u003eQArray,Index\u003d\u003eQIndex_}\n\n// Load Fixings, build curves and price the trades\n\nobject initObject extends SQObject(\"InitObject\") {\n  val ID \u003d \"InitObject\"\n  val curves \u003d List(SQReference(\"EUR_FWD_6M\",\"\"),SQReference(\"EUR_OIS\",\"\"))\n}\n\n\nval res \u003d Graph.applyOnce(initObject, (obj: SQObject) \u003d\u003e  {\n\n  obj match {\n    case x:Index \u003d\u003e      {println(\"Loading fixings for \" + x.ID)\n                          loadFixings(x) }\n\n    case x:YieldCurve \u003d\u003e {println(\"Building  curve \" + x.ID)\n                          buildCurve(x) }\n    case _ \u003d\u003e null\n  }\n\n})\n",
+      "dateUpdated": "Jun 17, 2016 12:43:04 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465907318333_1174917530",
+      "id": "20160614-122838_1958718501",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "import org.quantlib.{Array\u003d\u003eQArray, Index\u003d\u003eQIndex_}\ndefined object initObject\nLoading fixings for Euribor6M\nLoading fixings for EONIA\nBuilding  curve EUR_OIS\nBuilding  curve EUR_FWD_6M\nres: List[(String, Any)] \u003d List((Euribor6M,()), (EONIA,()), (EUR_OIS,org.quantlib.PiecewiseCubicZero@5eab2c19), (EUR_FWD_6M,org.quantlib.PiecewiseCubicZero@119cdfee))\n"
+      },
+      "dateCreated": "Jun 14, 2016 12:28:38 PM",
+      "dateStarted": "Jun 17, 2016 12:43:04 PM",
+      "dateFinished": "Jun 17, 2016 12:43:05 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nval qlCurve \u003d QLSession.get[org.quantlib.YieldTermStructureHandle](\"EUR_OIS\")",
+      "dateUpdated": "Jun 17, 2016 12:43:14 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465907366229_-985954887",
+      "id": "20160614-122926_876700689",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TEXT",
+        "msg": "qlCurve: org.quantlib.YieldTermStructureHandle \u003d org.quantlib.YieldTermStructureHandle@5fc2503c\n"
+      },
+      "dateCreated": "Jun 14, 2016 12:29:26 PM",
+      "dateStarted": "Jun 17, 2016 12:43:14 PM",
+      "dateFinished": "Jun 17, 2016 12:43:14 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "text": "%ignite\n\nprintln(s\"\"\"%table t \\t rate\n\"\"\")\n\n(0.0 to 10.0 by 0.1).foreach (\n    t \u003d\u003e\n        print( t + \"\\t\" + qlCurve.zeroRate(t, Compounding.Continuous, Frequency.Annual, true).rate + \"\\n\")\n)\n",
+      "dateUpdated": "Jun 17, 2016 12:43:17 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "lineChart",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [
+            {
+              "name": "t ",
+              "index": 0.0,
+              "aggr": "sum"
+            }
+          ],
+          "values": [
+            {
+              "name": " rate",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          ],
+          "groups": [],
+          "scatter": {
+            "xAxis": {
+              "name": "t ",
+              "index": 0.0,
+              "aggr": "sum"
+            },
+            "yAxis": {
+              "name": " rate",
+              "index": 1.0,
+              "aggr": "sum"
+            }
+          }
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465907590840_1081791327",
+      "id": "20160614-123310_1016716356",
+      "result": {
+        "code": "SUCCESS",
+        "type": "TABLE",
+        "msg": "t \t rate\n\n0.0\t0.0010138874803105528\n0.1\t0.0020841556297499573\n0.2\t0.003024337601817246\n0.30000000000000004\t0.003917152508210175\n0.4\t0.00477448300097145\n0.5\t0.005608211732143115\n0.6\t0.006430221353765675\n0.7\t0.007252394517881997\n0.7999999999999999\t0.008086613876533115\n0.8999999999999999\t0.008944762081760255\n0.9999999999999999\t0.0098387217856053\n1.0999999999999999\t0.010801902576836187\n1.2\t0.011860360994880649\n1.3\t0.012982273892920214\n1.4000000000000001\t0.014134783551920826\n1.5000000000000002\t0.015285032252848526\n1.6000000000000003\t0.01640016227666901\n1.7000000000000004\t0.017447315904348032\n1.8000000000000005\t0.01839363541685154\n1.9000000000000006\t0.01920626309514539\n2.0000000000000004\t0.019852341220195364\n2.1000000000000005\t0.02035958210411815\n2.2000000000000006\t0.02084613799517258\n2.3000000000000007\t0.02131706611142597\n2.400000000000001\t0.021772918644340215\n2.500000000000001\t0.022214247785377277\n2.600000000000001\t0.02264160572599916\n2.700000000000001\t0.023055544657667945\n2.800000000000001\t0.023456616771845535\n2.9000000000000012\t0.023845374259993946\n3.0000000000000013\t0.024222369313575264\n3.1000000000000014\t0.024588154124051326\n3.2000000000000015\t0.024943280882884233\n3.3000000000000016\t0.025288301781535998\n3.4000000000000017\t0.025623769011468525\n3.5000000000000018\t0.025950234764143907\n3.600000000000002\t0.026268251231024112\n3.700000000000002\t0.02657837060357107\n3.800000000000002\t0.0268811450732468\n3.900000000000002\t0.02717712683151341\n4.000000000000002\t0.027466868069832746\n4.100000000000001\t0.027750920979666884\n4.200000000000001\t0.028029837752477773\n4.300000000000001\t0.02830417057972747\n4.4\t0.028574471652877968\n4.5\t0.028841293163391186\n4.6\t0.02910518730272918\n4.699999999999999\t0.029366706262353937\n4.799999999999999\t0.029626402233727426\n4.899999999999999\t0.029884827408311693\n4.999999999999998\t0.03014253397756871\n5.099999999999998\t0.03039757834509027\n5.1999999999999975\t0.03064326065505835\n5.299999999999997\t0.030879671934461624\n5.399999999999997\t0.03110732724055363\n5.4999999999999964\t0.03132670417187871\n5.599999999999996\t0.03153824621279926\n5.699999999999996\t0.03174236572596825\n5.799999999999995\t0.031939446635234854\n5.899999999999995\t0.032129846835712766\n5.999999999999995\t0.0323139003628414\n6.099999999999994\t0.03249191934809698\n6.199999999999994\t0.032664195785441066\n6.299999999999994\t0.032831003129536164\n6.399999999999993\t0.03299259774412827\n6.499999999999993\t0.03314922021673294\n6.5999999999999925\t0.033301096553804116\n6.699999999999992\t0.03344843926887318\n6.799999999999992\t0.033591448374675516\n6.8999999999999915\t0.033730312289005304\n6.999999999999991\t0.033865208662925673\n7.099999999999991\t0.03399630513898913\n7.19999999999999\t0.03412376004627305\n7.29999999999999\t0.034247723038288894\n7.39999999999999\t0.03436833567916922\n7.499999999999989\t0.03448573198295938\n7.599999999999989\t0.03460003891033401\n7.699999999999989\t0.034711376826608006\n7.799999999999988\t0.03481985992451599\n7.899999999999988\t0.034925596614881996\n7.999999999999988\t0.035028689887988865\n8.099999999999987\t0.03512923764817952\n8.199999999999987\t0.03522733302397526\n8.299999999999986\t0.035323064655775935\n8.399999999999986\t0.03541651696300994\n8.499999999999986\t0.035507770392426634\n8.599999999999985\t0.03559690164906625\n8.699999999999985\t0.035683983911300315\n8.799999999999985\t0.03576908703121089\n8.899999999999984\t0.03585227772146058\n8.999999999999984\t0.035933619729704686\n9.099999999999984\t0.03601317400150387\n9.199999999999983\t0.036090998832611784\n9.299999999999983\t0.03616715001143781\n9.399999999999983\t0.036241680952416463\n9.499999999999982\t0.03631464282095346\n9.599999999999982\t0.03638608465056261\n9.699999999999982\t0.03645605345275712\n9.799999999999981\t0.03652459432021299\n9.89999999999998\t0.03659175052367983\n9.99999999999998\t0.036657563603077335\n"
+      },
+      "dateCreated": "Jun 14, 2016 12:33:10 PM",
+      "dateStarted": "Jun 17, 2016 12:43:17 PM",
+      "dateFinished": "Jun 17, 2016 12:43:17 PM",
+      "status": "FINISHED",
+      "progressUpdateIntervalMs": 500
+    },
+    {
+      "dateUpdated": "Jun 14, 2016 12:37:35 PM",
+      "config": {
+        "colWidth": 12.0,
+        "graph": {
+          "mode": "table",
+          "height": 300.0,
+          "optionOpen": false,
+          "keys": [],
+          "values": [],
+          "groups": [],
+          "scatter": {}
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "jobName": "paragraph_1465907643384_-1724289670",
+      "id": "20160614-123403_91845591",
+      "dateCreated": "Jun 14, 2016 12:34:03 PM",
+      "dateStarted": "Jun 14, 2016 12:37:35 PM",
+      "dateFinished": "Jun 14, 2016 12:37:35 PM",
+      "status": "ERROR",
+      "errorMessage": "",
+      "progressUpdateIntervalMs": 500
+    }
+  ],
+  "name": "QUIL.Objects: Alternative to XML based Pricing Config",
+  "id": "2BQ98524B",
+  "angularObjects": {
+    "2BMAUQEGZ": [],
+    "2BKDJU4A8": [],
+    "2BK4YDBHP": [],
+    "2BMZYRM31": []
+  },
+  "config": {
+    "looknfeel": "default"
+  },
+  "info": {}
+}
