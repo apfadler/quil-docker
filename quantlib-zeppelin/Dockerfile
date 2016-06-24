@@ -38,6 +38,12 @@ COPY libs/quantlib-1.7.jar /zeppelin/interpreter/ignite/quantlib-1.7.jar
 
 COPY interpreter.json /zeppelin/conf/interpreter.json
 
+COPY quil-common.xml /zeppelin/quil-common.xml
+
+COPY quil-client.xml /zeppelin/quil-client.xml
+
+COPY quil-server.xml /zeppelin/quil-server.xml
+
 CMD cd /zeppelin && JAVA_OPTS=" -DIGNITE_QUIET=false " LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib:/usr/local/lib bin/zeppelin-daemon.sh start && top -b
 
 
