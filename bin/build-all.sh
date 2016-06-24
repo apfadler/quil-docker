@@ -23,9 +23,10 @@ chmod a+x ../../quantlib-quil-worker/dist/bin/*.sh
 cp -r dist ../../quantlib-quil-aws-worker
 chmod a+x ../../quantlib-quil-aws-worker/dist/bin/*.sh
 
+
 mkdir ../../quantlib-zeppelin/libs
 cp -r dist/libs/* ../../quantlib-zeppelin/libs
-cp dist/config/*.xml ../quantlib-zeppelin/
+cp dist/config/*.xml ../../quantlib-zeppelin/
 
 
 cd ../../bin
@@ -48,5 +49,6 @@ rm -rf build
 rm -rf quantlib-quil-worker/libs
 rm -rf quantlib-quil-aws-worker/libs
 rm -rf quantlib-quil-server/dist
+rm -rf quantlib-zeppelin/libs
 
 echo "Done"
