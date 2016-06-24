@@ -175,7 +175,7 @@
       "group": "ignite",
       "properties": {
         "ignite.peerClassLoadingEnabled": "true",
-        "ignite.config.url": "",
+        "ignite.config.url": "file:quil-client.xml",
         "ignite.jdbc.url": "jdbc:ignite://localhost:11211/Tasks",
         "ignite.clientMode": "true",
         "ignite.addresses": "127.0.0.1:47500..47509"
